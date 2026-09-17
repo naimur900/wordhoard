@@ -2,23 +2,65 @@ import type { Metadata, Viewport } from "next";
 import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
+const DESCRIPTION =
+  "A pocket vocabulary deck — 810 words across 27 sets, with pictures, synonyms, antonyms, and easily confused pairs.";
+
+// Absolute URLs are what unfurlers need. Set NEXT_PUBLIC_SITE_URL to the real
+// domain in production; Vercel's own host is used as a fallback.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "Wordhoard",
-  description:
-    "A pocket vocabulary deck — 810 words across 27 sets, with pictures, synonyms, antonyms, and easily confused pairs.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Wordhoard — illustrated vocabulary sets",
+    template: "%s · Wordhoard",
+  },
+  description: DESCRIPTION,
+  applicationName: "Wordhoard",
+  keywords: [
+    "vocabulary",
+    "GRE words",
+    "flashcards",
+    "synonyms",
+    "antonyms",
+    "word list",
+    "English vocabulary",
+  ],
+  authors: [{ name: "Naimur", url: "https://naimurrahman.dev/" }],
+  creator: "Naimur",
+  publisher: "Naimur",
   manifest: "/manifest.webmanifest",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Wordhoard",
+    title: "Wordhoard — illustrated vocabulary sets",
+    description: DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wordhoard — illustrated vocabulary sets",
+    description: DESCRIPTION,
+  },
   icons: {
     icon: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Wordhoard",
   },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {

@@ -8,6 +8,7 @@ import PageShell from "@/components/PageShell";
 import SearchBar from "@/components/SearchBar";
 import SetRow from "@/components/SetRow";
 import SettingsModal from "@/components/SettingsModal";
+import SiteFooter from "@/components/SiteFooter";
 import { Gear } from "@/components/icons";
 
 export default function HomePage() {
@@ -88,6 +89,8 @@ export default function HomePage() {
           </button>
         </div>
       )}
+
+      <SiteFooter />
 
       {settingsOpen && (
         <SettingsModal
