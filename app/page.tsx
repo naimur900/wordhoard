@@ -37,7 +37,7 @@ export default function HomePage() {
             onClick={() => setSettingsOpen(true)}
             aria-label="Settings"
             aria-haspopup="dialog"
-            className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-ink dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-ink-dark"
+            className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-ink focus-visible:text-ink dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-ink-dark dark:focus-visible:text-ink-dark"
           >
             <Gear className="h-5 w-5" />
           </button>

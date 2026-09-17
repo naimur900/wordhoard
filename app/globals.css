@@ -181,6 +181,49 @@ body {
   animation: cardIn 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
+/* The dim behind a modal, fading in under the panel's own `card-in`. */
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay-in {
+  animation: overlayIn 220ms ease-out backwards;
+}
+
+/* Leaving: the entrance played backwards, a little quicker. */
+@keyframes cardOut {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
+.card-out {
+  animation: cardOut 200ms ease-in forwards;
+}
+
+@keyframes overlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.overlay-out {
+  animation: overlayOut 200ms ease-in forwards;
+}
+
 /* ---- Thin, minimal scrollbars everywhere -------------------------------- */
 * {
   scrollbar-width: thin;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   IMAGE_SIZES,
@@ -44,6 +44,19 @@ export default function SettingsModal({
   const panelRef = useRef<HTMLDivElement | null>(null);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [closing, setClosing] = useState(false);
+
+  // Play the entrance in reverse, then let the parent unmount us.
+  const requestClose = useCallback(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      onClose();
+      return;
+    }
+    setClosing((already) => {
+      if (!already) window.setTimeout(onClose, 200);
+      return true;
+    });
+  }, [onClose]);
 
   // The stored theme is only knowable on the client; wait for mount so the
   // selected state never disagrees with the server-rendered markup.
@@ -71,19 +84,21 @@ export default function SettingsModal({
     panelRef.current?.focus();
 
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") requestClose();
     }
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKey);
     };
-  }, [onClose]);
+  }, [requestClose]);
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink/25 p-3 backdrop-blur-sm sm:items-center sm:p-6 dark:bg-black/50"
-      onClick={onClose}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-ink/25 p-3 backdrop-blur-sm sm:p-6 dark:bg-black/50 ${
+        closing ? "overlay-out" : "overlay-in"
+      }`}
+      onClick={requestClose}
     >
       <div
         ref={panelRef}
@@ -92,7 +107,13 @@ export default function SettingsModal({
         aria-labelledby="settings-title"
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl border border-hairline bg-card p-5 shadow-2xl shadow-black/20 focus:outline-none dark:border-hairline-dark dark:bg-card-dark"
+        // Centred at every width; capped and scrollable so a short viewport
+        // (a phone in landscape) can still reach the bottom of the panel.
+        // `card-in` is the same entrance the word cards use, so the modal
+        // arrives the way the rest of the app does — and leaves in reverse.
+        className={`max-h-full w-full max-w-md overflow-y-auto overscroll-contain rounded-2xl border border-hairline bg-card p-5 shadow-2xl shadow-black/20 focus:outline-none dark:border-hairline-dark dark:bg-card-dark ${
+          closing ? "card-out" : "card-in"
+        }`}
       >
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -108,7 +129,7 @@ export default function SettingsModal({
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             aria-label="Close settings"
             className="-mr-1.5 -mt-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/50 hover:bg-paper hover:text-ink dark:text-ink-dark/50 dark:hover:bg-paper-dark dark:hover:text-ink-dark"
           >
