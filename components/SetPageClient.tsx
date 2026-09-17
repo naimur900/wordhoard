@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { getSetWords, wordId } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
+import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import SetNav from "@/components/SetNav";
 import WordCard from "@/components/WordCard";
@@ -14,6 +15,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
   const words = useMemo(() => getSetWords(setId), [setId]);
   const [highlighted, setHighlighted] = useState<number | null>(null);
   const { ready, isKnown, toggle, countForSet } = useKnownWords();
+  const { size } = useImageSize();
 
   // A ?open=<number> link (from search) scrolls to that word and flags it briefly.
   useEffect(() => {
@@ -78,6 +80,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
               entry={w}
               known={isKnown(wordId(w))}
               highlighted={highlighted === w.number}
+              size={size}
               onToggleKnown={() => toggle(wordId(w))}
             />
           ))}

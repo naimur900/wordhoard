@@ -1,15 +1,20 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { ALL_WORDS, getSetSummaries } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
+import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import SearchBar from "@/components/SearchBar";
 import SetRow from "@/components/SetRow";
+import SettingsModal from "@/components/SettingsModal";
+import { Gear } from "@/components/icons";
 
 export default function HomePage() {
   const sets = useMemo(() => getSetSummaries(), []);
   const { known, ready, countForSet, reset } = useKnownWords();
+  const { size, setSize } = useImageSize();
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const total = ALL_WORDS.length;
   const knownTotal = known.size;
   const progress = ready && total > 0 ? knownTotal / total : 0;
@@ -23,9 +28,20 @@ export default function HomePage() {
   return (
     <PageShell className="min-h-screen">
       <div className="rounded-2xl border border-hairline bg-card/70 p-4 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/70">
-        <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl dark:text-ink-dark">
-          Wordhoard
-        </h1>
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl dark:text-ink-dark">
+            Wordhoard
+          </h1>
+          <button
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+            aria-label="Settings"
+            aria-haspopup="dialog"
+            className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-ink dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-ink-dark"
+          >
+            <Gear className="h-5 w-5" />
+          </button>
+        </div>
         <p className="mt-1.5 max-w-prose font-sans text-sm text-ink/60 dark:text-ink-dark/60">
           A working vocabulary of {total} words, gathered into {sets.length} sets of{" "}
           {sets[0]?.count ?? 30}.
@@ -70,6 +86,14 @@ export default function HomePage() {
             Reset progress
           </button>
         </div>
+      )}
+
+      {settingsOpen && (
+        <SettingsModal
+          size={size}
+          onSelect={setSize}
+          onClose={() => setSettingsOpen(false)}
+        />
       )}
     </PageShell>
   );

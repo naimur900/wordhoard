@@ -1,6 +1,7 @@
 "use client";
 
 import type { VocabEntry } from "@/lib/types";
+import type { ImageSize } from "@/lib/useImageSize";
 import WordImage from "@/components/WordImage";
 import { Stamp, Alert } from "@/components/icons";
 
@@ -35,15 +36,29 @@ function ChipRow({
   );
 }
 
+/**
+ * Every step grows the picture but leaves the meaning a readable column.
+ * The tightest case is the 640px breakpoint, where cards first go two-up and
+ * are at their narrowest — so LG holds its phone size there and takes its
+ * extra width only from `lg:` up, where the card has room to give.
+ */
+const THUMB_SIZE: Record<ImageSize, string> = {
+  s: "h-14 w-14 sm:h-16 sm:w-16",
+  md: "h-20 w-20 sm:h-24 sm:w-24",
+  lg: "h-24 w-24 lg:h-32 lg:w-32",
+};
+
 export default function WordCard({
   entry,
   known,
   highlighted = false,
+  size = "md",
   onToggleKnown,
 }: {
   entry: VocabEntry;
   known: boolean;
   highlighted?: boolean;
+  size?: ImageSize;
   onToggleKnown: () => void;
 }) {
   const confused = entry.commonly_confused_with ?? [];
@@ -66,7 +81,7 @@ export default function WordCard({
           <WordImage
             entry={entry}
             variant="card"
-            className="h-20 w-20 rounded-xl ring-1 ring-hairline sm:h-24 sm:w-24 dark:ring-hairline-dark"
+            className={`rounded-xl ring-1 ring-hairline dark:ring-hairline-dark ${THUMB_SIZE[size]}`}
           />
           <span className="absolute -left-1.5 -top-1.5 flex h-6 min-w-[1.5rem] items-center justify-center rounded-full border border-hairline bg-paper px-1.5 font-sans text-[11px] tabular-nums text-ink/55 dark:border-hairline-dark dark:bg-paper-dark dark:text-ink-dark/55">
             {entry.number}
@@ -75,7 +90,10 @@ export default function WordCard({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="min-w-0 break-words font-serif text-lg font-semibold leading-tight text-ink sm:text-xl dark:text-ink-dark">
+            {/* Two-up cards are narrowest just past 640px, where a long word can
+                outrun its column — hyphenate there rather than snapping a
+                letter onto its own line, and save the larger type for `lg:`. */}
+            <h3 className="min-w-0 hyphens-auto break-words font-serif text-lg font-semibold leading-tight text-ink lg:text-xl dark:text-ink-dark">
               {entry.word}
             </h3>
             <button
