@@ -71,3 +71,46 @@ export function Alert(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+/** Clipboard with a tick — the test. */
+export function Quiz(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path
+        d="M9 4.6H7.6A1.6 1.6 0 0 0 6 6.2v12.2A1.6 1.6 0 0 0 7.6 20h8.8a1.6 1.6 0 0 0 1.6-1.6V6.2A1.6 1.6 0 0 0 16.4 4.6H15"
+        stroke="currentColor"
+      />
+      <rect x="9" y="3" width="6" height="3.2" rx="1.1" stroke="currentColor" />
+      <path d="m9.2 13 1.9 1.9L15 11" stroke="currentColor" />
+    </svg>
+  );
+}
+
+/** A circled cross, for a wrong answer in the review. */
+export function Cross(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" />
+      <path d="m9 9 6 6M15 9l-6 6" stroke="currentColor" />
+    </svg>
+  );
+}
+
+/** A circled tick, for a right answer in the review. */
+export function Check(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" />
+      <path d="m8.2 12.2 2.6 2.6 5-5.4" stroke="currentColor" />
+    </svg>
+  );
+}
+
+/** Circular arrow — retake the test. */
+export function Refresh(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M20 12a8 8 0 1 1-2.5-5.8" stroke="currentColor" />
+      <path d="M20 4v4.5h-4.5" stroke="currentColor" />
+    </svg>
+  );
+}

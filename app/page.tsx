@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ALL_WORDS, getSetSummaries } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
@@ -9,7 +10,7 @@ import SearchBar from "@/components/SearchBar";
 import SetRow from "@/components/SetRow";
 import SettingsModal from "@/components/SettingsModal";
 import SiteFooter from "@/components/SiteFooter";
-import { Gear } from "@/components/icons";
+import { Gear, Quiz } from "@/components/icons";
 
 export default function HomePage() {
   const sets = useMemo(() => getSetSummaries(), []);
@@ -33,15 +34,25 @@ export default function HomePage() {
           <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl dark:text-ink-dark">
             Wordhoard
           </h1>
-          <button
-            type="button"
-            onClick={() => setSettingsOpen(true)}
-            aria-label="Settings"
-            aria-haspopup="dialog"
-            className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-ink focus-visible:text-ink dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-ink-dark dark:focus-visible:text-ink-dark"
-          >
-            <Gear className="h-5 w-5" />
-          </button>
+          <div className="-mr-1 -mt-1 flex shrink-0 items-center gap-0.5">
+            <Link
+              href="/test"
+              aria-label="Take a test"
+              title="Take a test"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-stamp focus-visible:text-stamp dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-stamp-dark dark:focus-visible:text-stamp-dark"
+            >
+              <Quiz className="h-5 w-5" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setSettingsOpen(true)}
+              aria-label="Settings"
+              aria-haspopup="dialog"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-ink/45 transition-colors hover:bg-paper hover:text-ink focus-visible:text-ink dark:text-ink-dark/45 dark:hover:bg-paper-dark dark:hover:text-ink-dark dark:focus-visible:text-ink-dark"
+            >
+              <Gear className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         <p className="mt-1.5 max-w-prose font-sans text-sm text-ink/60 dark:text-ink-dark/60">
           A working vocabulary of {total} words, gathered into {sets.length} sets of{" "}
