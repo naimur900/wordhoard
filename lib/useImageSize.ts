@@ -19,7 +19,7 @@ export const IMAGE_SIZE_HINTS: Record<ImageSize, string> = {
 
 const STORAGE_KEY = "wordhoard:image-size";
 const CHANGE_EVENT = "wordhoard:image-size-change";
-const DEFAULT_SIZE: ImageSize = "md";
+const DEFAULT_SIZE: ImageSize = "lg";
 
 function readStorage(): ImageSize {
   if (typeof window === "undefined") return DEFAULT_SIZE;

@@ -38,12 +38,6 @@ function ChipRow({
 }
 
 /**
- * Every step grows the picture but leaves the meaning a readable column.
- * The tightest case is the 640px breakpoint, where cards first go two-up and
- * are at their narrowest — so LG holds its phone size there and takes its
- * extra width only from `lg:` up, where the card has room to give.
- */
-/**
  * One accent hue per part of speech. `chip` colours the tag beside the word,
  * `bar` the rule down the left of the example sentence, so a card's grammar is
  * legible at a glance without another block of text.
@@ -85,6 +79,12 @@ function partsOfSpeech(value: string | undefined) {
     .filter(Boolean);
 }
 
+/**
+ * Every step grows the picture but leaves the meaning a readable column.
+ * The tightest case is the 640px breakpoint, where cards first go two-up and
+ * are at their narrowest — so LG holds its phone size there and takes its
+ * extra width only from `lg:` up, where the card has room to give.
+ */
 const THUMB_SIZE: Record<ImageSize, string> = {
   s: "h-14 w-14 sm:h-16 sm:w-16",
   md: "h-20 w-20 sm:h-24 sm:w-24",
@@ -95,7 +95,7 @@ export default function WordCard({
   entry,
   known,
   highlighted = false,
-  size = "md",
+  size = "lg",
   index = 0,
   onToggleKnown,
 }: {
