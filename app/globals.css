@@ -17,6 +17,11 @@
   --ledger-dark: 127 174 153;
   --caution-dark: 217 169 74;
   --hairline-dark: 58 54 43;
+
+  --azure-dark: 147 180 230;
+  --plum-dark: 205 160 202;
+  --teal-dark: 133 199 192;
+  --honey-dark: 217 185 124;
 }
 
 .dark {
@@ -33,6 +38,11 @@
   --ledger-dark: 138 212 180;
   --caution-dark: 240 193 90;
   --hairline-dark: 42 42 42;
+
+  --azure-dark: 163 193 242;
+  --plum-dark: 220 175 216;
+  --teal-dark: 148 214 206;
+  --honey-dark: 230 196 137;
 }
 
 html {

@@ -39,6 +39,24 @@ const config: Config = {
           DEFAULT: "#D8CFB8",
           dark: "rgb(var(--hairline-dark) / <alpha-value>)",
         },
+        // Part-of-speech accents: one hue per grammatical class, kept clear of
+        // ledger (synonyms) and stamp (antonyms) so nothing reads as a chip.
+        azure: {
+          DEFAULT: "#3A5A8C",
+          dark: "rgb(var(--azure-dark) / <alpha-value>)",
+        },
+        plum: {
+          DEFAULT: "#7A3E77",
+          dark: "rgb(var(--plum-dark) / <alpha-value>)",
+        },
+        teal: {
+          DEFAULT: "#2E6F6A",
+          dark: "rgb(var(--teal-dark) / <alpha-value>)",
+        },
+        honey: {
+          DEFAULT: "#8A6A2F",
+          dark: "rgb(var(--honey-dark) / <alpha-value>)",
+        },
       },
       fontFamily: {
         serif: ["Fraunces", "Georgia", "serif"],
