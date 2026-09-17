@@ -2,8 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Themes -------------------------------------------------------------
+   Every dark-side colour is a token, so a theme is just a different set of
+   values. `.dark` is the paper-at-night palette; `.oled` swaps the ground for
+   true black (no light emitted on an OLED panel) and lifts the accents enough
+   to stay legible against it. next-themes puts the class on <html>. */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+
+  --ink-dark: 237 231 216;
+  --paper-dark: 24 22 15;
+  --card-dark: 33 30 23;
+  --stamp-dark: 217 122 99;
+  --ledger-dark: 127 174 153;
+  --caution-dark: 217 169 74;
+  --hairline-dark: 58 54 43;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.oled {
+  color-scheme: dark;
+
+  --ink-dark: 240 239 235;
+  --paper-dark: 0 0 0;
+  --card-dark: 14 14 14;
+  --stamp-dark: 255 143 118;
+  --ledger-dark: 138 212 180;
+  --caution-dark: 240 193 90;
+  --hairline-dark: 42 42 42;
 }
 
 html {
@@ -32,11 +61,15 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #18160f;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  }
+.dark body {
+  background-color: rgb(var(--paper-dark));
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* No paper grain on OLED — the point is pixels that emit nothing at all. */
+.oled body {
+  background-color: rgb(var(--paper-dark));
+  background-image: none;
 }
 
 /* ---- Sticky "liquid glass" veil ------------------------------------------
@@ -52,10 +85,9 @@ body {
   --veil-rgb: 239 233 218;
 }
 
-@media (prefers-color-scheme: dark) {
-  .veil {
-    --veil-rgb: 24 22 15;
-  }
+.dark .veil,
+.oled .veil {
+  --veil-rgb: var(--paper-dark);
 }
 
 .veil-layers {
@@ -125,10 +157,9 @@ body {
   border-radius: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :focus-visible {
-    outline-color: #d97a63;
-  }
+.dark :focus-visible,
+.oled :focus-visible {
+  outline-color: rgb(var(--stamp-dark));
 }
 
 /* ---- Word cards easing in when a set loads ------------------------------
@@ -179,18 +210,36 @@ body {
   background: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  * {
-    scrollbar-color: rgb(237 231 216 / 0.2) transparent;
-  }
+.dark *,
+.oled * {
+  scrollbar-color: rgb(var(--ink-dark) / 0.2) transparent;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: rgb(237 231 216 / 0.2);
-  }
+.dark *::-webkit-scrollbar-thumb,
+.oled *::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--ink-dark) / 0.2);
+}
 
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(237 231 216 / 0.35);
-  }
+.dark *::-webkit-scrollbar-thumb:hover,
+.oled *::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--ink-dark) / 0.35);
+}
+
+/* ---- Theme switch: ease the colours across instead of snapping ----------
+   Only while the class is on <html> (a few hundred ms), so the app isn't
+   carrying a transition on every element for the rest of its life. */
+.theme-animating,
+.theme-animating *,
+.theme-animating *::before,
+.theme-animating *::after {
+  transition:
+    background-color 380ms ease,
+    border-color 380ms ease,
+    color 380ms ease,
+    fill 380ms ease,
+    stroke 380ms ease,
+    outline-color 380ms ease,
+    box-shadow 380ms ease !important;
 }
 
 /* Hide scrollbars on horizontally-swiped rows while keeping them scrollable */

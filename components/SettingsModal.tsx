@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import {
   IMAGE_SIZES,
   IMAGE_SIZE_HINTS,
@@ -8,6 +9,21 @@ import {
   type ImageSize,
 } from "@/lib/useImageSize";
 import { Close } from "@/components/icons";
+
+const THEMES = [
+  {
+    value: "system",
+    label: "Classic",
+    hint: "Follows your device",
+    swatch: "bg-gradient-to-br from-[#efe9da] via-[#efe9da] to-[#18160f]",
+  },
+  {
+    value: "oled",
+    label: "Pure black",
+    hint: "For dark lovers",
+    swatch: "bg-black",
+  },
+] as const;
 
 /** Preview block, scaled the way the real thumbnail is. */
 const PREVIEW: Record<ImageSize, string> = {
@@ -26,6 +42,28 @@ export default function SettingsModal({
   onClose: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // The stored theme is only knowable on the client; wait for mount so the
+  // selected state never disagrees with the server-rendered markup.
+  useEffect(() => setMounted(true), []);
+
+  const currentTheme = !mounted ? null : theme === "oled" ? "oled" : "system";
+
+  function chooseTheme(next: string) {
+    const root = document.documentElement;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (still) {
+      setTheme(next);
+      return;
+    }
+
+    root.classList.add("theme-animating");
+    setTheme(next);
+    window.setTimeout(() => root.classList.remove("theme-animating"), 450);
+  }
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -62,10 +100,10 @@ export default function SettingsModal({
               id="settings-title"
               className="font-serif text-xl font-semibold text-ink dark:text-ink-dark"
             >
-              Image size
+              Settings
             </h2>
             <p className="mt-1 font-sans text-sm text-ink/55 dark:text-ink-dark/55">
-              How large word pictures appear on set pages.
+              Remembered on this device.
             </p>
           </div>
           <button
@@ -78,7 +116,10 @@ export default function SettingsModal({
           </button>
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-2.5">
+        <h3 className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
+          Image size
+        </h3>
+        <div className="mt-2 grid grid-cols-3 gap-2.5">
           {IMAGE_SIZES.map((option) => {
             const selected = option === size;
             return (
@@ -119,9 +160,45 @@ export default function SettingsModal({
           })}
         </div>
 
-        <p className="mt-4 font-sans text-xs text-ink/40 dark:text-ink-dark/40">
-          Applies to every set, and is remembered on this device.
-        </p>
+        <h3 className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
+          Theme
+        </h3>
+        <div className="mt-2 grid grid-cols-2 gap-2.5">
+          {THEMES.map((option) => {
+            const selected = currentTheme === option.value;
+            return (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => chooseTheme(option.value)}
+                aria-pressed={selected}
+                className={`flex items-center gap-3 rounded-xl border p-3 text-left transition-colors ${
+                  selected
+                    ? "border-stamp/50 bg-stamp/10 dark:border-stamp-dark/50 dark:bg-stamp-dark/10"
+                    : "border-hairline hover:border-ink/25 dark:border-hairline-dark dark:hover:border-ink-dark/25"
+                }`}
+              >
+                <span
+                  className={`h-9 w-9 shrink-0 rounded-lg ring-1 ring-inset ring-ink/15 dark:ring-ink-dark/20 ${option.swatch}`}
+                />
+                <span className="min-w-0">
+                  <span
+                    className={`block font-sans text-sm font-semibold ${
+                      selected
+                        ? "text-stamp dark:text-stamp-dark"
+                        : "text-ink/75 dark:text-ink-dark/75"
+                    }`}
+                  >
+                    {option.label}
+                  </span>
+                  <span className="block font-sans text-[11px] leading-tight text-ink/45 dark:text-ink-dark/45">
+                    {option.hint}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

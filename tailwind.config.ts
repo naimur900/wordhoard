@@ -1,7 +1,9 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "media",
+  // `dark:` utilities fire for both the paper-dark theme and the OLED one;
+  // what separates them is the value behind each --*-dark token (globals.css).
+  darkMode: ["variant", ["&:where(.dark, .dark *)", "&:where(.oled, .oled *)"]],
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -11,31 +13,31 @@ const config: Config = {
       colors: {
         ink: {
           DEFAULT: "#23231F",
-          dark: "#EDE7D8",
+          dark: "rgb(var(--ink-dark) / <alpha-value>)",
         },
         paper: {
           DEFAULT: "#EFE9DA",
-          dark: "#18160F",
+          dark: "rgb(var(--paper-dark) / <alpha-value>)",
         },
         card: {
           DEFAULT: "#FBF8F1",
-          dark: "#211E17",
+          dark: "rgb(var(--card-dark) / <alpha-value>)",
         },
         stamp: {
           DEFAULT: "#8C3B2E",
-          dark: "#D97A63",
+          dark: "rgb(var(--stamp-dark) / <alpha-value>)",
         },
         ledger: {
           DEFAULT: "#3E5C4E",
-          dark: "#7FAE99",
+          dark: "rgb(var(--ledger-dark) / <alpha-value>)",
         },
         caution: {
           DEFAULT: "#A67C27",
-          dark: "#D9A94A",
+          dark: "rgb(var(--caution-dark) / <alpha-value>)",
         },
         hairline: {
           DEFAULT: "#D8CFB8",
-          dark: "#3A362B",
+          dark: "rgb(var(--hairline-dark) / <alpha-value>)",
         },
       },
       fontFamily: {

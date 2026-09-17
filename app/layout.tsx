@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,7 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // next-themes writes the theme class on <html> before paint; React must be
+    // told not to flag that difference against the server-rendered markup.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -50,7 +53,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen font-sans text-ink antialiased dark:text-ink-dark">
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
