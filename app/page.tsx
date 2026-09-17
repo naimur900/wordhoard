@@ -66,10 +66,11 @@ export default function HomePage() {
         Sets
       </h2>
       <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {sets.map((set) => (
+        {sets.map((set, i) => (
           <SetRow
             key={set.id}
             set={set}
+            index={i}
             known={countForSet(set.id)}
             ready={ready}
           />

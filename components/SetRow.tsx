@@ -8,17 +8,24 @@ export default function SetRow({
   set,
   known,
   ready,
+  index = 0,
 }: {
   set: SetSummary;
   known: number;
   ready: boolean;
+  /** Position in the list, used to stagger the entrance animation. */
+  index?: number;
 }) {
   const pad = String(set.id).padStart(2, "0");
   const complete = ready && known === set.count;
   const progress = ready ? known / set.count : 0;
 
   return (
-    <li className="min-w-0">
+    <li
+      className="card-in min-w-0"
+      // Matches the word cards: only the first screenful staggers.
+      style={{ animationDelay: `${Math.min(index, 11) * 45}ms` }}
+    >
       <Link
         href={`/sets/${set.id}`}
         className={`flex h-full items-center gap-3.5 rounded-2xl border bg-card/80 p-3.5 transition-colors sm:gap-4 sm:p-4 dark:bg-card-dark/80 ${

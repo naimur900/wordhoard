@@ -53,12 +53,15 @@ export default function WordCard({
   known,
   highlighted = false,
   size = "md",
+  index = 0,
   onToggleKnown,
 }: {
   entry: VocabEntry;
   known: boolean;
   highlighted?: boolean;
   size?: ImageSize;
+  /** Position in the set, used to stagger the entrance animation. */
+  index?: number;
   onToggleKnown: () => void;
 }) {
   const confused = entry.commonly_confused_with ?? [];
@@ -68,7 +71,10 @@ export default function WordCard({
   return (
     <li
       id={`word-${entry.number}`}
-      className={`flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card/80 shadow-sm shadow-black/[0.03] transition duration-300 ${
+      // Only the first screenful staggers; past that the delay would outlast
+      // the scroll it was meant to accompany.
+      style={{ animationDelay: `${Math.min(index, 11) * 45}ms` }}
+      className={`card-in flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card/80 shadow-sm shadow-black/[0.03] transition duration-300 ${
         highlighted
           ? "border-stamp/50 ring-2 ring-stamp/40 dark:border-stamp-dark/50 dark:ring-stamp-dark/40"
           : known

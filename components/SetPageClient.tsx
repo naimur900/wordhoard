@@ -2,17 +2,23 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { getSetWords, wordId } from "@/lib/vocab";
+import { getSetIds, getSetWords, wordId } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import SetNav from "@/components/SetNav";
 import WordCard from "@/components/WordCard";
-import { ChevronLeft } from "@/components/icons";
+import { ChevronLeft, ChevronRight } from "@/components/icons";
 
 export default function SetPageClient({ setId: setIdParam }: { setId: string }) {
   const setId = Number(setIdParam);
   const words = useMemo(() => getSetWords(setId), [setId]);
+  const nextSet = useMemo(() => {
+    const next = getSetIds().find((id) => id > setId);
+    return next === undefined
+      ? null
+      : { id: next, sample: getSetWords(next).slice(0, 3).map((w) => w.word) };
+  }, [setId]);
   const [highlighted, setHighlighted] = useState<number | null>(null);
   const { ready, isKnown, toggle, countForSet } = useKnownWords();
   const { size } = useImageSize();
@@ -74,10 +80,11 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
         </div>
 
         <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {words.map((w) => (
+          {words.map((w, i) => (
             <WordCard
               key={wordId(w)}
               entry={w}
+              index={i}
               known={isKnown(wordId(w))}
               highlighted={highlighted === w.number}
               size={size}
@@ -85,6 +92,40 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
             />
           ))}
         </ul>
+
+        {nextSet ? (
+          <Link
+            href={`/sets/${nextSet.id}`}
+            className="group mt-4 flex items-center gap-4 rounded-2xl border border-hairline bg-card/80 p-4 transition-colors hover:border-stamp/40 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/80 dark:hover:border-stamp-dark/40"
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
+                Up next
+              </span>
+              <span className="mt-0.5 block font-serif text-xl font-semibold text-ink dark:text-ink-dark">
+                Set {nextSet.id}
+              </span>
+              <span className="mt-0.5 block truncate font-sans text-sm text-ink/55 dark:text-ink-dark/55">
+                {nextSet.sample.join(", ")}…
+              </span>
+            </span>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-stamp text-paper transition-transform group-hover:translate-x-0.5 dark:bg-stamp-dark dark:text-paper-dark">
+              <ChevronRight className="h-5 w-5" />
+            </span>
+          </Link>
+        ) : (
+          <div className="mt-4 rounded-2xl border border-hairline bg-card/80 p-5 text-center dark:border-hairline-dark dark:bg-card-dark/80">
+            <p className="font-serif text-lg font-semibold text-ink dark:text-ink-dark">
+              That is the last set
+            </p>
+            <Link
+              href="/"
+              className="mt-2 inline-flex items-center gap-1 font-sans text-sm text-stamp hover:underline dark:text-stamp-dark"
+            >
+              <ChevronLeft className="h-4 w-4" /> Back to all sets
+            </Link>
+          </div>
+        )}
       </PageShell>
     </>
   );

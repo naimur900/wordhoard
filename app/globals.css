@@ -109,7 +109,11 @@ body {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays too, or a staggered entrance just becomes a stagger of blank
+       cards — the `backwards` fill holds them hidden until the delay ends. */
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }
@@ -125,6 +129,25 @@ body {
   :focus-visible {
     outline-color: #d97a63;
   }
+}
+
+/* ---- Word cards easing in when a set loads ------------------------------
+   `backwards` fill so the hidden start state only applies during the delay:
+   if animations are off (reduced motion zeroes the duration below), the card
+   simply renders in its natural state instead of staying invisible. */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.card-in {
+  animation: cardIn 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 /* ---- Thin, minimal scrollbars everywhere -------------------------------- */
