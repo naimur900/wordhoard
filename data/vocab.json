@@ -59,7 +59,8 @@
     "antonyms": [
       "luxurious",
       "indulgent",
-      "ornate"
+      "ornate",
+      "lavish"
     ]
   },
   {
@@ -98,7 +99,9 @@
       "fickle",
       "whimsical",
       "erratic",
-      "mercurial"
+      "mercurial",
+      "arbitrary",
+      "wayward"
     ],
     "antonyms": [
       "consistent",
@@ -187,7 +190,8 @@
     "antonyms": [
       "thorough",
       "meticulous",
-      "careful"
+      "careful",
+      "exhaustive"
     ]
   },
   {
@@ -336,7 +340,9 @@
     "antonyms": [
       "heterogeneous",
       "diverse",
-      "varied"
+      "varied",
+      "disparate",
+      "eclectic"
     ]
   },
   {
@@ -461,7 +467,10 @@
     "antonyms": [
       "careful",
       "attentive",
-      "conscientious"
+      "conscientious",
+      "painstaking",
+      "sedulous",
+      "vigilant"
     ]
   },
   {
@@ -479,7 +488,8 @@
       "servile",
       "fawning",
       "sycophantic",
-      "groveling"
+      "groveling",
+      "subservient"
     ],
     "antonyms": [
       "assertive",
@@ -521,7 +531,9 @@
       "inclination",
       "tendency",
       "predisposition",
-      "penchant"
+      "penchant",
+      "predilection",
+      "propensity"
     ],
     "antonyms": [
       "aversion",
@@ -626,7 +638,8 @@
       "cautious",
       "chary",
       "guarded",
-      "circumspect"
+      "circumspect",
+      "vigilant"
     ],
     "antonyms": [
       "reckless",
@@ -652,7 +665,8 @@
     "antonyms": [
       "purify",
       "refine",
-      "cleanse"
+      "cleanse",
+      "distill"
     ]
   },
   {
@@ -668,7 +682,8 @@
       "champion",
       "support",
       "endorse",
-      "promote"
+      "promote",
+      "apologist"
     ],
     "antonyms": [
       "oppose",
@@ -778,7 +793,8 @@
     "antonyms": [
       "intractable",
       "stubborn",
-      "uncooperative"
+      "uncooperative",
+      "obstinate"
     ]
   },
   {
@@ -815,7 +831,8 @@
       "bold",
       "daring",
       "fearless",
-      "brazen"
+      "brazen",
+      "presumptuous"
     ],
     "antonyms": [
       "timid",
@@ -838,7 +855,8 @@
       "greedy",
       "covetous",
       "grasping",
-      "rapacious"
+      "rapacious",
+      "acquisitive"
     ],
     "antonyms": [
       "generous",
@@ -859,7 +877,8 @@
       "trite",
       "hackneyed",
       "clichéd",
-      "commonplace"
+      "commonplace",
+      "mundane"
     ],
     "antonyms": [
       "original",
@@ -880,12 +899,15 @@
       "harmless",
       "gentle",
       "kindly",
-      "benevolent"
+      "benevolent",
+      "innocuous"
     ],
     "antonyms": [
       "malignant",
       "harmful",
-      "malevolent"
+      "malevolent",
+      "pernicious",
+      "virulent"
     ]
   },
   {
@@ -948,7 +970,8 @@
     "antonyms": [
       "evasive",
       "guarded",
-      "deceitful"
+      "deceitful",
+      "disingenuous"
     ]
   },
   {
@@ -964,7 +987,9 @@
       "rebuke",
       "chastise",
       "reprimand",
-      "berate"
+      "berate",
+      "excoriate",
+      "upbraid"
     ],
     "antonyms": [
       "praise",
@@ -985,7 +1010,9 @@
       "scathing",
       "biting",
       "acerbic",
-      "mordant"
+      "mordant",
+      "acrimonious",
+      "astringent"
     ],
     "antonyms": [
       "gentle",
@@ -1050,7 +1077,9 @@
       "complex",
       "tangled",
       "intricate",
-      "labyrinthine"
+      "labyrinthine",
+      "byzantine",
+      "tortuous"
     ],
     "antonyms": [
       "straightforward",
@@ -1332,7 +1361,8 @@
     "antonyms": [
       "normal",
       "typical",
-      "conventional"
+      "conventional",
+      "paradigmatic"
     ]
   },
   {
@@ -1353,7 +1383,8 @@
     "antonyms": [
       "affinity",
       "fondness",
-      "sympathy"
+      "sympathy",
+      "proclivity"
     ]
   },
   {
@@ -1392,7 +1423,8 @@
       "strenuous",
       "laborious",
       "grueling",
-      "taxing"
+      "taxing",
+      "onerous"
     ],
     "antonyms": [
       "easy",
@@ -1441,7 +1473,9 @@
     "antonyms": [
       "hedonistic",
       "indulgent",
-      "sybaritic"
+      "sybaritic",
+      "decadent",
+      "libertine"
     ]
   },
   {
@@ -1520,7 +1554,8 @@
       "flourish",
       "thrive",
       "bloom",
-      "mushroom"
+      "mushroom",
+      "proliferate"
     ],
     "antonyms": [
       "shrink",
@@ -1585,12 +1620,16 @@
       "condemn",
       "criticize",
       "reprimand",
-      "rebuke"
+      "rebuke",
+      "decry",
+      "denounce",
+      "reproach"
     ],
     "antonyms": [
       "praise",
       "commend",
-      "endorse"
+      "endorse",
+      "approbation"
     ]
   },
   {
@@ -1606,7 +1645,8 @@
       "trickery",
       "deception",
       "subterfuge",
-      "duplicity"
+      "duplicity",
+      "skulduggery"
     ],
     "antonyms": [
       "honesty",
@@ -1737,7 +1777,8 @@
     "antonyms": [
       "provincial",
       "parochial",
-      "insular"
+      "insular",
+      "xenophobic"
     ]
   },
   {
@@ -1753,7 +1794,8 @@
       "respect",
       "regard",
       "esteem",
-      "submission"
+      "submission",
+      "obeisance"
     ],
     "antonyms": [
       "disrespect",
@@ -1900,12 +1942,15 @@
       "wordy",
       "long-winded",
       "prolix",
-      "garrulous"
+      "garrulous",
+      "diffuse"
     ],
     "antonyms": [
       "concise",
       "succinct",
-      "terse"
+      "terse",
+      "laconic",
+      "pithy"
     ]
   },
   {
@@ -1972,7 +2017,9 @@
     "antonyms": [
       "neglect",
       "despise",
-      "abandon"
+      "abandon",
+      "abhor",
+      "loathe"
     ]
   },
   {
@@ -1993,7 +2040,8 @@
     "antonyms": [
       "contradict",
       "refute",
-      "disprove"
+      "disprove",
+      "gainsay"
     ]
   },
   {
@@ -2072,7 +2120,9 @@
       "fleeting",
       "transient",
       "short-lived",
-      "momentary"
+      "momentary",
+      "evanescent",
+      "transitory"
     ],
     "antonyms": [
       "permanent",
@@ -2114,7 +2164,8 @@
       "talkative",
       "loquacious",
       "chatty",
-      "voluble"
+      "voluble",
+      "verbose"
     ],
     "antonyms": [
       "taciturn",
@@ -2221,7 +2272,8 @@
       "alleviate",
       "lessen",
       "ease",
-      "temper"
+      "temper",
+      "assuage"
     ],
     "antonyms": [
       "aggravate",
@@ -2242,7 +2294,8 @@
       "outdated",
       "antiquated",
       "outmoded",
-      "archaic"
+      "archaic",
+      "anachronistic"
     ],
     "antonyms": [
       "current",
@@ -2268,7 +2321,9 @@
     "antonyms": [
       "transparent",
       "clear",
-      "lucid"
+      "lucid",
+      "limpid",
+      "pellucid"
     ]
   },
   {
@@ -2331,7 +2386,8 @@
     "antonyms": [
       "agitated",
       "turbulent",
-      "excitable"
+      "excitable",
+      "irascible"
     ]
   },
   {
@@ -2431,12 +2487,14 @@
       "wise",
       "judicious",
       "sensible",
-      "circumspect"
+      "circumspect",
+      "discreet"
     ],
     "antonyms": [
       "imprudent",
       "rash",
-      "reckless"
+      "reckless",
+      "foolhardy"
     ]
   },
   {
@@ -2562,7 +2620,8 @@
     "antonyms": [
       "friendly",
       "warm",
-      "approachable"
+      "approachable",
+      "convivial"
     ]
   },
   {
@@ -2604,7 +2663,13 @@
     "antonyms": [
       "unconventional",
       "unorthodox",
-      "original"
+      "original",
+      "anomalous",
+      "eccentric",
+      "heterodox",
+      "iconoclastic",
+      "idiosyncratic",
+      "quirky"
     ]
   },
   {
@@ -2725,12 +2790,17 @@
       "lavish",
       "excessive",
       "profligate",
-      "wasteful"
+      "wasteful",
+      "baroque",
+      "flamboyant",
+      "prodigal",
+      "spendthrift"
     ],
     "antonyms": [
       "frugal",
       "economical",
-      "restrained"
+      "restrained",
+      "parsimonious"
     ]
   },
   {
@@ -2772,7 +2842,8 @@
     "antonyms": [
       "serious",
       "important",
-      "weighty"
+      "weighty",
+      "pensive"
     ]
   },
   {
@@ -2809,7 +2880,8 @@
       "domineering",
       "overbearing",
       "dictatorial",
-      "haughty"
+      "haughty",
+      "magisterial"
     ],
     "antonyms": [
       "humble",
@@ -2877,7 +2949,9 @@
     "antonyms": [
       "resolute",
       "determined",
-      "decisive"
+      "decisive",
+      "dogged",
+      "pertinacious"
     ]
   },
   {
@@ -2919,7 +2993,9 @@
     "antonyms": [
       "strict",
       "rigorous",
-      "vigilant"
+      "vigilant",
+      "punctilious",
+      "stringent"
     ]
   },
   {
@@ -2998,7 +3074,8 @@
       "dull",
       "mundane",
       "unimaginative",
-      "commonplace"
+      "commonplace",
+      "pedestrian"
     ],
     "antonyms": [
       "imaginative",
@@ -3040,7 +3117,8 @@
       "restless",
       "fidgety",
       "impatient",
-      "unruly"
+      "unruly",
+      "skittish"
     ],
     "antonyms": [
       "calm",
@@ -3066,7 +3144,8 @@
     "antonyms": [
       "constant",
       "continuous",
-      "regular"
+      "regular",
+      "incessant"
     ]
   },
   {
@@ -3103,12 +3182,15 @@
       "weaken",
       "sabotage",
       "subvert",
-      "erode"
+      "erode",
+      "undercut",
+      "vitiate"
     ],
     "antonyms": [
       "strengthen",
       "bolster",
-      "support"
+      "support",
+      "buttress"
     ]
   },
   {
@@ -3150,7 +3232,8 @@
     "antonyms": [
       "energetic",
       "refreshed",
-      "invigorated"
+      "invigorated",
+      "indefatigable"
     ]
   },
   {
@@ -3254,12 +3337,14 @@
       "ease",
       "relieve",
       "mitigate",
-      "assuage"
+      "assuage",
+      "ameliorate"
     ],
     "antonyms": [
       "aggravate",
       "intensify",
-      "worsen"
+      "worsen",
+      "exacerbate"
     ]
   },
   {
@@ -3301,7 +3386,8 @@
     "antonyms": [
       "undermine",
       "weaken",
-      "sabotage"
+      "sabotage",
+      "undercut"
     ]
   },
   {
@@ -3317,7 +3403,8 @@
       "jingoistic",
       "bigoted",
       "prejudiced",
-      "partisan"
+      "partisan",
+      "xenophobic"
     ],
     "antonyms": [
       "impartial",
@@ -3343,7 +3430,8 @@
     "antonyms": [
       "amateur",
       "novice",
-      "dilettante"
+      "dilettante",
+      "philistine"
     ]
   },
   {
@@ -3506,7 +3594,8 @@
       "overconfident",
       "arrogant",
       "audacious",
-      "forward"
+      "forward",
+      "entitled"
     ],
     "antonyms": [
       "modest",
@@ -3532,7 +3621,8 @@
     "antonyms": [
       "dishonesty",
       "corruption",
-      "duplicity"
+      "duplicity",
+      "malfeasance"
     ]
   },
   {
@@ -3550,7 +3640,8 @@
       "multiply",
       "increase",
       "burgeon",
-      "mushroom"
+      "mushroom",
+      "abound"
     ],
     "antonyms": [
       "decrease",
@@ -3699,12 +3790,14 @@
       "docile",
       "compliant",
       "manageable",
-      "amenable"
+      "amenable",
+      "malleable"
     ],
     "antonyms": [
       "intractable",
       "stubborn",
-      "unruly"
+      "unruly",
+      "headstrong"
     ]
   },
   {
@@ -3720,7 +3813,9 @@
       "fleeting",
       "temporary",
       "ephemeral",
-      "short-lived"
+      "short-lived",
+      "momentary",
+      "transitory"
     ],
     "antonyms": [
       "permanent",
@@ -3804,7 +3899,8 @@
       "revere",
       "respect",
       "honor",
-      "esteem"
+      "esteem",
+      "deify"
     ],
     "antonyms": [
       "despise",
@@ -3916,7 +4012,8 @@
     "antonyms": [
       "abundance",
       "plenty",
-      "surplus"
+      "surplus",
+      "barrage"
     ]
   },
   {
@@ -4037,7 +4134,9 @@
       "parochial",
       "narrow-minded",
       "provincial",
-      "isolated"
+      "isolated",
+      "myopic",
+      "xenophobic"
     ],
     "antonyms": [
       "cosmopolitan",
@@ -4126,7 +4225,8 @@
     "antonyms": [
       "love",
       "adore",
-      "cherish"
+      "cherish",
+      "relish"
     ]
   },
   {
@@ -4163,7 +4263,8 @@
       "pliable",
       "moldable",
       "adaptable",
-      "tractable"
+      "tractable",
+      "plastic"
     ],
     "antonyms": [
       "rigid",
@@ -4184,7 +4285,8 @@
       "beginner",
       "novice",
       "newcomer",
-      "tyro"
+      "tyro",
+      "fledgling"
     ],
     "antonyms": [
       "veteran",
@@ -4331,7 +4433,8 @@
       "healthful",
       "wholesome",
       "beneficial",
-      "invigorating"
+      "invigorating",
+      "salutary"
     ],
     "antonyms": [
       "unhealthy",
@@ -4352,7 +4455,8 @@
       "authorize",
       "approve",
       "permit",
-      "endorse"
+      "endorse",
+      "countenance"
     ],
     "antonyms": [
       "prohibit",
@@ -4583,7 +4687,8 @@
       "showy",
       "ostentatious",
       "extravagant",
-      "theatrical"
+      "theatrical",
+      "florid"
     ],
     "antonyms": [
       "understated",
@@ -4709,7 +4814,8 @@
       "brief",
       "fleeting",
       "transient",
-      "short-lived"
+      "short-lived",
+      "ephemeral"
     ],
     "antonyms": [
       "lasting",
@@ -4730,12 +4836,15 @@
       "ordinary",
       "commonplace",
       "banal",
-      "routine"
+      "routine",
+      "humdrum",
+      "prosaic"
     ],
     "antonyms": [
       "extraordinary",
       "exotic",
-      "remarkable"
+      "remarkable",
+      "numinous"
     ]
   },
   {
@@ -4772,7 +4881,8 @@
       "invalidate",
       "annul",
       "void",
-      "negate"
+      "negate",
+      "neutralize"
     ],
     "antonyms": [
       "validate",
@@ -4835,7 +4945,8 @@
       "expel",
       "remove",
       "depose",
-      "evict"
+      "evict",
+      "banish"
     ],
     "antonyms": [
       "install",
@@ -4987,7 +5098,8 @@
     "antonyms": [
       "abundant",
       "ample",
-      "plentiful"
+      "plentiful",
+      "profuse"
     ]
   },
   {
@@ -5024,12 +5136,16 @@
       "insignificant",
       "unimportant",
       "petty",
-      "minor"
+      "minor",
+      "frivolous",
+      "trifling"
     ],
     "antonyms": [
       "significant",
       "important",
-      "momentous"
+      "momentous",
+      "exigent",
+      "profound"
     ]
   },
   {
@@ -5087,12 +5203,15 @@
       "crude",
       "uncouth",
       "loutish",
-      "vulgar"
+      "vulgar",
+      "churlish"
     ],
     "antonyms": [
       "refined",
       "polite",
-      "cultured"
+      "cultured",
+      "chivalrous",
+      "urbane"
     ]
   },
   {
@@ -5129,7 +5248,8 @@
       "cautious",
       "wary",
       "prudent",
-      "guarded"
+      "guarded",
+      "discreet"
     ],
     "antonyms": [
       "reckless",
@@ -5171,7 +5291,8 @@
       "proportionate",
       "corresponding",
       "equivalent",
-      "comparable"
+      "comparable",
+      "tantamount"
     ],
     "antonyms": [
       "disproportionate",
@@ -5194,12 +5315,14 @@
       "warm",
       "friendly",
       "genial",
-      "affable"
+      "affable",
+      "amicable"
     ],
     "antonyms": [
       "cold",
       "unfriendly",
-      "hostile"
+      "hostile",
+      "acrimonious"
     ]
   },
   {
@@ -5346,7 +5469,8 @@
     "antonyms": [
       "strong",
       "robust",
-      "vigorous"
+      "vigorous",
+      "trenchant"
     ]
   },
   {
@@ -5404,7 +5528,9 @@
       "random",
       "disorganized",
       "chaotic",
-      "hit-or-miss"
+      "hit-or-miss",
+      "desultory",
+      "indiscriminate"
     ],
     "antonyms": [
       "systematic",
@@ -5446,7 +5572,8 @@
       "hinder",
       "obstruct",
       "hamper",
-      "block"
+      "block",
+      "inhibit"
     ],
     "antonyms": [
       "facilitate",
@@ -5532,12 +5659,16 @@
       "careful",
       "precise",
       "thorough",
-      "fastidious"
+      "fastidious",
+      "painstaking",
+      "punctilious",
+      "scrupulous"
     ],
     "antonyms": [
       "careless",
       "sloppy",
-      "slapdash"
+      "slapdash",
+      "cursory"
     ]
   },
   {
@@ -5616,7 +5747,8 @@
       "eccentric",
       "idiosyncratic",
       "peculiar",
-      "offbeat"
+      "offbeat",
+      "whimsical"
     ],
     "antonyms": [
       "conventional",
@@ -5637,7 +5769,8 @@
       "reject",
       "renounce",
       "disavow",
-      "disown"
+      "disown",
+      "abjure"
     ],
     "antonyms": [
       "embrace",
@@ -5700,12 +5833,15 @@
       "chaotic",
       "tumultuous",
       "stormy",
-      "unruly"
+      "unruly",
+      "tempestuous"
     ],
     "antonyms": [
       "calm",
       "peaceful",
-      "tranquil"
+      "tranquil",
+      "placid",
+      "serene"
     ]
   },
   {
@@ -5805,7 +5941,8 @@
       "avoid",
       "shun",
       "abstain from",
-      "forgo"
+      "forgo",
+      "abstain"
     ],
     "antonyms": [
       "embrace",
@@ -5854,7 +5991,8 @@
     "antonyms": [
       "direct",
       "frank",
-      "forthright"
+      "forthright",
+      "candid"
     ]
   },
   {
@@ -5899,7 +6037,8 @@
     "antonyms": [
       "delay",
       "hinder",
-      "impede"
+      "impede",
+      "hamper"
     ]
   },
   {
@@ -5915,7 +6054,8 @@
       "meticulous",
       "particular",
       "fussy",
-      "exacting"
+      "exacting",
+      "finicky"
     ],
     "antonyms": [
       "careless",
@@ -5936,7 +6076,8 @@
       "pretend",
       "fake",
       "simulate",
-      "affect"
+      "affect",
+      "dissemble"
     ],
     "antonyms": [
       "be genuine",
@@ -5957,7 +6098,8 @@
       "stealthy",
       "secretive",
       "sneaky",
-      "surreptitious"
+      "surreptitious",
+      "clandestine"
     ],
     "antonyms": [
       "open",
@@ -6020,7 +6162,8 @@
       "mourn",
       "grieve",
       "bemoan",
-      "bewail"
+      "bewail",
+      "dirge"
     ],
     "antonyms": [
       "celebrate",
@@ -6083,12 +6226,14 @@
       "biased",
       "prejudiced",
       "one-sided",
-      "partisan"
+      "partisan",
+      "subjective"
     ],
     "antonyms": [
       "impartial",
       "unbiased",
-      "fair"
+      "fair",
+      "disinterested"
     ]
   },
   {
@@ -6151,7 +6296,8 @@
     "antonyms": [
       "cosmopolitan",
       "worldly",
-      "sophisticated"
+      "sophisticated",
+      "urbane"
     ]
   },
   {
@@ -6339,7 +6485,9 @@
       "decline",
       "diminish",
       "dwindle",
-      "ebb"
+      "ebb",
+      "abate",
+      "subside"
     ],
     "antonyms": [
       "wax",
@@ -6383,7 +6531,8 @@
       "rowdy",
       "noisy",
       "unruly",
-      "exuberant"
+      "exuberant",
+      "clamorous"
     ],
     "antonyms": [
       "quiet",
@@ -6535,7 +6684,10 @@
     "antonyms": [
       "accidental",
       "unintentional",
-      "spontaneous"
+      "spontaneous",
+      "fortuitous",
+      "impetuous",
+      "precipitate"
     ]
   },
   {
@@ -6887,7 +7039,8 @@
       "fake",
       "counterfeit",
       "pretense",
-      "fraud"
+      "fraud",
+      "bogus"
     ],
     "antonyms": [
       "genuine",
@@ -6929,7 +7082,9 @@
       "lethargic",
       "slow",
       "listless",
-      "torpid"
+      "torpid",
+      "dilatory",
+      "languid"
     ],
     "antonyms": [
       "energetic",
@@ -7013,7 +7168,8 @@
       "hostile",
       "aggressive",
       "combative",
-      "pugnacious"
+      "pugnacious",
+      "truculent"
     ],
     "antonyms": [
       "peaceful",
@@ -7186,7 +7342,8 @@
     "antonyms": [
       "alleviate",
       "mitigate",
-      "improve"
+      "improve",
+      "ameliorate"
     ]
   },
   {
@@ -7307,12 +7464,14 @@
       "terse",
       "concise",
       "brief",
-      "succinct"
+      "succinct",
+      "taciturn"
     ],
     "antonyms": [
       "verbose",
       "loquacious",
-      "long-winded"
+      "long-winded",
+      "garrulous"
     ]
   },
   {
@@ -7417,7 +7576,8 @@
     "antonyms": [
       "generous",
       "lavish",
-      "extravagant"
+      "extravagant",
+      "munificent"
     ]
   },
   {
@@ -7433,7 +7593,8 @@
       "marginal",
       "secondary",
       "incidental",
-      "outer"
+      "outer",
+      "tangential"
     ],
     "antonyms": [
       "central",
@@ -7459,7 +7620,8 @@
     "antonyms": [
       "soothing",
       "calming",
-      "unprovocative"
+      "unprovocative",
+      "conciliatory"
     ]
   },
   {
@@ -7475,12 +7637,14 @@
       "relinquish",
       "abandon",
       "abjure",
-      "forsake"
+      "forsake",
+      "repudiate"
     ],
     "antonyms": [
       "embrace",
       "retain",
-      "claim"
+      "claim",
+      "covet"
     ]
   },
   {
@@ -7654,7 +7818,8 @@
     "antonyms": [
       "selfish",
       "egoistic",
-      "self-serving"
+      "self-serving",
+      "mercenary"
     ]
   },
   {
@@ -7738,7 +7903,11 @@
     "antonyms": [
       "antagonistic",
       "confrontational",
-      "provocative"
+      "provocative",
+      "belligerent",
+      "incendiary",
+      "polemical",
+      "pugnacious"
     ]
   },
   {
@@ -7754,7 +7923,8 @@
       "approve",
       "tolerate",
       "sanction",
-      "condone"
+      "condone",
+      "brook"
     ],
     "antonyms": [
       "oppose",
@@ -7775,7 +7945,8 @@
       "secret",
       "clandestine",
       "hidden",
-      "undercover"
+      "undercover",
+      "surreptitious"
     ],
     "antonyms": [
       "overt",
@@ -7801,7 +7972,8 @@
     "antonyms": [
       "incredible",
       "implausible",
-      "untrustworthy"
+      "untrustworthy",
+      "suspect"
     ]
   },
   {
@@ -7859,12 +8031,14 @@
       "thorough",
       "comprehensive",
       "complete",
-      "all-inclusive"
+      "all-inclusive",
+      "encyclopedic"
     ],
     "antonyms": [
       "cursory",
       "superficial",
-      "incomplete"
+      "incomplete",
+      "synoptic"
     ]
   },
   {
@@ -7880,7 +8054,8 @@
       "thrilling",
       "invigorating",
       "exciting",
-      "electrifying"
+      "electrifying",
+      "heady"
     ],
     "antonyms": [
       "boring",
@@ -7948,7 +8123,8 @@
     "antonyms": [
       "effective",
       "fruitful",
-      "productive"
+      "productive",
+      "efficacious"
     ]
   },
   {
@@ -8009,12 +8185,15 @@
       "sluggish",
       "torpid",
       "listless",
-      "languid"
+      "languid",
+      "indolent",
+      "somnolent"
     ],
     "antonyms": [
       "energetic",
       "lively",
-      "vigorous"
+      "vigorous",
+      "ebullient"
     ]
   },
   {
@@ -8093,12 +8272,22 @@
       "unclear",
       "cryptic",
       "unknown",
-      "vague"
+      "vague",
+      "arcane",
+      "eclipse",
+      "esoteric",
+      "opaque",
+      "recondite"
     ],
     "antonyms": [
       "clear",
       "famous",
-      "obvious"
+      "obvious",
+      "decipher",
+      "delineate",
+      "elucidate",
+      "manifest",
+      "patent"
     ]
   },
   {
@@ -8119,7 +8308,10 @@
     "antonyms": [
       "covert",
       "hidden",
-      "concealed"
+      "concealed",
+      "clandestine",
+      "furtive",
+      "surreptitious"
     ]
   },
   {
@@ -8179,12 +8371,14 @@
       "logical",
       "reasonable",
       "sensible",
-      "sound"
+      "sound",
+      "cerebral"
     ],
     "antonyms": [
       "irrational",
       "illogical",
-      "unreasonable"
+      "unreasonable",
+      "arbitrary"
     ]
   },
   {
@@ -8200,7 +8394,8 @@
       "scornful",
       "withering",
       "caustic",
-      "blistering"
+      "blistering",
+      "mordant"
     ],
     "antonyms": [
       "complimentary",
@@ -8226,7 +8421,9 @@
     "antonyms": [
       "obvious",
       "blatant",
-      "crude"
+      "crude",
+      "didactic",
+      "palpable"
     ]
   },
   {
@@ -8242,12 +8439,19 @@
       "shallow",
       "surface-level",
       "cursory",
-      "skin-deep"
+      "skin-deep",
+      "frivolous",
+      "glib"
     ],
     "antonyms": [
       "deep",
       "thorough",
-      "profound"
+      "profound",
+      "encyclopedic",
+      "entrenched",
+      "exhaustive",
+      "ingrained",
+      "radical"
     ]
   },
   {
@@ -8266,7 +8470,8 @@
       "consent",
       "comply",
       "accede",
-      "yield"
+      "yield",
+      "relent"
     ],
     "antonyms": [
       "resist",
@@ -8287,7 +8492,8 @@
       "skillful",
       "deft",
       "dexterous",
-      "nimble"
+      "nimble",
+      "adept"
     ],
     "antonyms": [
       "clumsy",
@@ -8418,7 +8624,8 @@
     "antonyms": [
       "incompetent",
       "inept",
-      "unqualified"
+      "unqualified",
+      "feckless"
     ]
   },
   {
@@ -8562,7 +8769,9 @@
       "demanding",
       "rigorous",
       "strict",
-      "stringent"
+      "stringent",
+      "fastidious",
+      "punctilious"
     ],
     "antonyms": [
       "lenient",
@@ -8604,12 +8813,14 @@
       "productive",
       "profitable",
       "fertile",
-      "rewarding"
+      "rewarding",
+      "fecund"
     ],
     "antonyms": [
       "fruitless",
       "barren",
-      "unproductive"
+      "unproductive",
+      "futile"
     ]
   },
   {
@@ -8672,7 +8883,11 @@
     "antonyms": [
       "talkative",
       "forthcoming",
-      "expansive"
+      "expansive",
+      "garrulous",
+      "loquacious",
+      "officious",
+      "vociferous"
     ]
   },
   {
@@ -8730,7 +8945,8 @@
       "secret",
       "stealthy",
       "furtive",
-      "covert"
+      "covert",
+      "clandestine"
     ],
     "antonyms": [
       "open",
@@ -8898,7 +9114,8 @@
       "estrange",
       "isolate",
       "antagonize",
-      "distance"
+      "distance",
+      "polarize"
     ],
     "antonyms": [
       "unite",
@@ -8919,12 +9136,15 @@
       "indifference",
       "unconcern",
       "lethargy",
-      "listlessness"
+      "listlessness",
+      "torpor"
     ],
     "antonyms": [
       "enthusiasm",
       "passion",
-      "interest"
+      "interest",
+      "alacrity",
+      "fervor"
     ]
   },
   {
@@ -8961,7 +9181,9 @@
       "appropriate",
       "suitable",
       "fitting",
-      "inclined"
+      "inclined",
+      "apropos",
+      "felicitous"
     ],
     "antonyms": [
       "inapt",
@@ -9045,7 +9267,8 @@
       "differing",
       "conflicting",
       "dissimilar",
-      "deviating"
+      "deviating",
+      "disparate"
     ],
     "antonyms": [
       "convergent",
@@ -9071,7 +9294,8 @@
     "antonyms": [
       "dejected",
       "despondent",
-      "miserable"
+      "miserable",
+      "crestfallen"
     ]
   },
   {
@@ -9087,7 +9311,8 @@
       "captivate",
       "charm",
       "delight",
-      "bewitch"
+      "bewitch",
+      "enthrall"
     ],
     "antonyms": [
       "repel",
@@ -9108,7 +9333,8 @@
       "ingrained",
       "established",
       "rooted",
-      "embedded"
+      "embedded",
+      "inveterate"
     ],
     "antonyms": [
       "superficial",
@@ -9134,7 +9360,8 @@
     "antonyms": [
       "native",
       "ordinary",
-      "familiar"
+      "familiar",
+      "mundane"
     ]
   },
   {
@@ -9192,7 +9419,8 @@
       "abandon",
       "desert",
       "renounce",
-      "relinquish"
+      "relinquish",
+      "betray"
     ],
     "antonyms": [
       "support",
@@ -9239,7 +9467,8 @@
     "antonyms": [
       "ignore",
       "disregard",
-      "neglect"
+      "neglect",
+      "discount"
     ]
   },
   {
@@ -9255,7 +9484,8 @@
       "wise",
       "prudent",
       "sensible",
-      "shrewd"
+      "shrewd",
+      "sagacious"
     ],
     "antonyms": [
       "injudicious",
@@ -9276,12 +9506,15 @@
       "clear",
       "coherent",
       "intelligible",
-      "pellucid"
+      "pellucid",
+      "limpid"
     ],
     "antonyms": [
       "confusing",
       "murky",
-      "unintelligible"
+      "unintelligible",
+      "befuddled",
+      "opaque"
     ]
   },
   {
@@ -9297,7 +9530,8 @@
       "relevant",
       "apposite",
       "germane",
-      "applicable"
+      "applicable",
+      "apropos"
     ],
     "antonyms": [
       "irrelevant",
@@ -9381,12 +9615,19 @@
       "refined",
       "cultured",
       "worldly",
-      "advanced"
+      "advanced",
+      "cosmopolitan",
+      "urbane"
     ],
     "antonyms": [
       "unsophisticated",
       "naive",
-      "simple"
+      "simple",
+      "elementary",
+      "ingenuous",
+      "provincial",
+      "puerile",
+      "rudimentary"
     ]
   },
   {
@@ -9428,7 +9669,10 @@
     "antonyms": [
       "exaggerated",
       "flamboyant",
-      "ostentatious"
+      "ostentatious",
+      "bombastic",
+      "histrionic",
+      "sensational"
     ]
   },
   {
@@ -9509,7 +9753,9 @@
       "unstable",
       "explosive",
       "unpredictable",
-      "mercurial"
+      "mercurial",
+      "erratic",
+      "tempestuous"
     ],
     "antonyms": [
       "stable",
@@ -9551,7 +9797,9 @@
       "exile",
       "expel",
       "deport",
-      "oust"
+      "oust",
+      "exorcise",
+      "relegate"
     ],
     "antonyms": [
       "welcome",
@@ -9593,7 +9841,8 @@
       "obey",
       "conform",
       "adhere",
-      "abide"
+      "abide",
+      "acquiesce"
     ],
     "antonyms": [
       "defy",
@@ -9679,7 +9928,9 @@
       "avoid",
       "dodge",
       "elude",
-      "sidestep"
+      "sidestep",
+      "prevaricate",
+      "skirt"
     ],
     "antonyms": [
       "confront",
@@ -9789,7 +10040,8 @@
     "antonyms": [
       "plan",
       "rehearse",
-      "prepare"
+      "prepare",
+      "premeditate"
     ]
   },
   {
@@ -9889,7 +10141,9 @@
       "strange",
       "odd",
       "unusual",
-      "distinctive"
+      "distinctive",
+      "idiosyncratic",
+      "quirky"
     ],
     "antonyms": [
       "ordinary",
@@ -9933,7 +10187,9 @@
       "wasteful",
       "extravagant",
       "prodigal",
-      "dissolute"
+      "dissolute",
+      "libertine",
+      "spendthrift"
     ],
     "antonyms": [
       "frugal",
@@ -9959,7 +10215,8 @@
     "antonyms": [
       "estrange",
       "alienate",
-      "divide"
+      "divide",
+      "polarize"
     ]
   },
   {
@@ -9975,12 +10232,14 @@
       "purify",
       "improve",
       "polish",
-      "perfect"
+      "perfect",
+      "distill"
     ],
     "antonyms": [
       "contaminate",
       "coarsen",
-      "degrade"
+      "degrade",
+      "adulterate"
     ]
   },
   {
@@ -9998,12 +10257,14 @@
       "surrender",
       "renounce",
       "give up",
-      "cede"
+      "cede",
+      "forsake"
     ],
     "antonyms": [
       "retain",
       "keep",
-      "hold onto"
+      "hold onto",
+      "appropriate"
     ]
   },
   {
@@ -10061,7 +10322,8 @@
       "unnecessary",
       "redundant",
       "excess",
-      "surplus"
+      "surplus",
+      "extraneous"
     ],
     "antonyms": [
       "necessary",
@@ -10103,12 +10365,14 @@
       "comprehensive",
       "exhaustive",
       "meticulous",
-      "complete"
+      "complete",
+      "painstaking"
     ],
     "antonyms": [
       "cursory",
       "superficial",
-      "partial"
+      "partial",
+      "perfunctory"
     ]
   },
   {
@@ -10124,12 +10388,14 @@
       "farsighted",
       "prophetic",
       "imaginative",
-      "idealistic"
+      "idealistic",
+      "prescient"
     ],
     "antonyms": [
       "shortsighted",
       "pragmatic",
-      "unimaginative"
+      "unimaginative",
+      "myopic"
     ]
   },
   {
@@ -10168,12 +10434,16 @@
       "praise",
       "applaud",
       "celebrate",
-      "laud"
+      "laud",
+      "approbation",
+      "tout"
     ],
     "antonyms": [
       "criticize",
       "condemn",
-      "denounce"
+      "denounce",
+      "excoriate",
+      "opprobrium"
     ]
   },
   {
@@ -10215,7 +10485,9 @@
     "antonyms": [
       "timid",
       "passive",
-      "diffident"
+      "diffident",
+      "obsequious",
+      "subservient"
     ]
   },
   {
@@ -10231,7 +10503,8 @@
       "fake",
       "counterfeit",
       "sham",
-      "fraudulent"
+      "fraudulent",
+      "spurious"
     ],
     "antonyms": [
       "genuine",
@@ -10315,7 +10588,8 @@
       "controversial",
       "disputatious",
       "quarrelsome",
-      "combative"
+      "combative",
+      "polemical"
     ],
     "antonyms": [
       "agreeable",
@@ -10441,12 +10715,14 @@
       "impede",
       "obstruct",
       "hamper",
-      "thwart"
+      "thwart",
+      "inhibit"
     ],
     "antonyms": [
       "help",
       "facilitate",
-      "expedite"
+      "expedite",
+      "abet"
     ]
   },
   {
@@ -10462,7 +10738,8 @@
       "damage",
       "weaken",
       "harm",
-      "diminish"
+      "diminish",
+      "vitiate"
     ],
     "antonyms": [
       "improve",
@@ -10548,7 +10825,8 @@
       "habitual",
       "chronic",
       "confirmed",
-      "entrenched"
+      "entrenched",
+      "ingrained"
     ],
     "antonyms": [
       "occasional",
@@ -10574,7 +10852,9 @@
     "antonyms": [
       "generous",
       "lavish",
-      "openhanded"
+      "openhanded",
+      "munificent",
+      "spendthrift"
     ]
   },
   {
@@ -10653,7 +10933,8 @@
       "flexible",
       "pliable",
       "compliant",
-      "yielding"
+      "yielding",
+      "supple"
     ],
     "antonyms": [
       "rigid",
@@ -10695,12 +10976,16 @@
       "valid",
       "solid",
       "reliable",
-      "well-founded"
+      "well-founded",
+      "rational",
+      "tenable"
     ],
     "antonyms": [
       "unsound",
       "flawed",
-      "unreliable"
+      "unreliable",
+      "fallacious",
+      "specious"
     ]
   },
   {
@@ -10826,7 +11111,9 @@
     "antonyms": [
       "inaccessible",
       "remote",
-      "unavailable"
+      "unavailable",
+      "esoteric",
+      "recondite"
     ]
   },
   {
@@ -10866,7 +11153,8 @@
       "merge",
       "combine",
       "unite",
-      "fuse"
+      "fuse",
+      "coalesce"
     ],
     "antonyms": [
       "separate",
@@ -10934,7 +11222,11 @@
     "antonyms": [
       "liking",
       "fondness",
-      "attraction"
+      "attraction",
+      "affinity",
+      "predilection",
+      "proclivity",
+      "propensity"
     ]
   },
   {
@@ -10978,7 +11270,8 @@
     "antonyms": [
       "respect",
       "admiration",
-      "esteem"
+      "esteem",
+      "deference"
     ]
   },
   {
@@ -11104,7 +11397,8 @@
     "antonyms": [
       "inequitable",
       "unfair",
-      "biased"
+      "biased",
+      "exploitative"
     ]
   },
   {
@@ -11120,7 +11414,8 @@
       "unpredictable",
       "inconsistent",
       "irregular",
-      "volatile"
+      "volatile",
+      "capricious"
     ],
     "antonyms": [
       "consistent",
@@ -11230,7 +11525,16 @@
     "antonyms": [
       "boastful",
       "arrogant",
-      "immodest"
+      "immodest",
+      "bombastic",
+      "brazen",
+      "entitled",
+      "flamboyant",
+      "haughty",
+      "officious",
+      "ostentatious",
+      "presumptuous",
+      "pretentious"
     ]
   },
   {
@@ -11251,7 +11555,8 @@
     "antonyms": [
       "harmless",
       "wholesome",
-      "beneficial"
+      "beneficial",
+      "innocuous"
     ]
   },
   {
@@ -11267,7 +11572,8 @@
       "harmful",
       "destructive",
       "deadly",
-      "insidious"
+      "insidious",
+      "noxious"
     ],
     "antonyms": [
       "beneficial",
@@ -11351,12 +11657,15 @@
       "contempt",
       "disdain",
       "derision",
-      "mockery"
+      "mockery",
+      "deride",
+      "flout"
     ],
     "antonyms": [
       "respect",
       "admiration",
-      "esteem"
+      "esteem",
+      "venerate"
     ]
   },
   {
@@ -11545,7 +11854,8 @@
     "antonyms": [
       "naive",
       "artless",
-      "guileless"
+      "guileless",
+      "ingenuous"
     ]
   },
   {
@@ -11587,7 +11897,8 @@
     "antonyms": [
       "agree",
       "assent",
-      "concur"
+      "concur",
+      "consensus"
     ]
   },
   {
@@ -11624,7 +11935,8 @@
       "doubtful",
       "questionable",
       "suspect",
-      "uncertain"
+      "uncertain",
+      "incredulous"
     ],
     "antonyms": [
       "certain",
@@ -11708,7 +12020,8 @@
       "ornate",
       "flowery",
       "flamboyant",
-      "ruddy"
+      "ruddy",
+      "baroque"
     ],
     "antonyms": [
       "plain",
@@ -11839,12 +12152,17 @@
       "innocent",
       "ingenuous",
       "credulous",
-      "unsophisticated"
+      "unsophisticated",
+      "artless",
+      "gullible"
     ],
     "antonyms": [
       "sophisticated",
       "worldly",
-      "cynical"
+      "cynical",
+      "astute",
+      "canny",
+      "cunning"
     ]
   },
   {
@@ -11860,7 +12178,9 @@
       "honorable",
       "virtuous",
       "dignified",
-      "lofty"
+      "lofty",
+      "chivalrous",
+      "magnanimous"
     ],
     "antonyms": [
       "ignoble",
@@ -11902,7 +12222,8 @@
       "dull",
       "unimaginative",
       "commonplace",
-      "prosaic"
+      "prosaic",
+      "plodding"
     ],
     "antonyms": [
       "imaginative",
@@ -11965,7 +12286,8 @@
       "fundamental",
       "drastic",
       "extreme",
-      "revolutionary"
+      "revolutionary",
+      "iconoclastic"
     ],
     "antonyms": [
       "superficial",
@@ -12028,7 +12350,8 @@
       "fleeting",
       "transient",
       "ephemeral",
-      "brief"
+      "brief",
+      "evanescent"
     ],
     "antonyms": [
       "permanent",
@@ -12049,7 +12372,8 @@
       "feasible",
       "workable",
       "practicable",
-      "sustainable"
+      "sustainable",
+      "tenable"
     ],
     "antonyms": [
       "unviable",
@@ -12154,7 +12478,8 @@
       "deceitful",
       "two-faced",
       "dishonest",
-      "double-dealing"
+      "double-dealing",
+      "disingenuous"
     ],
     "antonyms": [
       "honest",
@@ -12175,7 +12500,8 @@
       "advantageous",
       "convenient",
       "practical",
-      "politic"
+      "politic",
+      "recourse"
     ],
     "antonyms": [
       "inexpedient",
@@ -12196,7 +12522,8 @@
       "invent",
       "concoct",
       "falsify",
-      "manufacture"
+      "manufacture",
+      "coin"
     ],
     "antonyms": [
       "tell the truth",
@@ -12264,7 +12591,8 @@
     "antonyms": [
       "extrinsic",
       "acquired",
-      "external"
+      "external",
+      "extraneous"
     ]
   },
   {
@@ -12345,7 +12673,8 @@
       "obvious",
       "evident",
       "apparent",
-      "patent"
+      "patent",
+      "overt"
     ],
     "antonyms": [
       "hidden",
@@ -12366,7 +12695,8 @@
       "tiny",
       "minuscule",
       "infinitesimal",
-      "microscopic"
+      "microscopic",
+      "diminutive"
     ],
     "antonyms": [
       "huge",
@@ -12450,7 +12780,8 @@
       "devout",
       "religious",
       "reverent",
-      "godly"
+      "godly",
+      "sanctimonious"
     ],
     "antonyms": [
       "impious",
@@ -12534,7 +12865,8 @@
       "defame",
       "malign",
       "libel",
-      "smear"
+      "smear",
+      "calumny"
     ],
     "antonyms": [
       "praise",
@@ -12597,12 +12929,14 @@
       "concise",
       "brief",
       "succinct",
-      "pithy"
+      "pithy",
+      "laconic"
     ],
     "antonyms": [
       "verbose",
       "wordy",
-      "rambling"
+      "rambling",
+      "prolix"
     ]
   },
   {
@@ -12746,7 +13080,9 @@
       "hostility",
       "enmity",
       "antagonism",
-      "rancor"
+      "rancor",
+      "animus",
+      "antipathy"
     ],
     "antonyms": [
       "goodwill",
@@ -13108,7 +13444,8 @@
     "antonyms": [
       "petty",
       "vindictive",
-      "mean-spirited"
+      "mean-spirited",
+      "avaricious"
     ]
   },
   {
@@ -13276,7 +13613,8 @@
     "antonyms": [
       "irresolute",
       "hesitant",
-      "wavering"
+      "wavering",
+      "ambivalent"
     ]
   },
   {
@@ -13549,7 +13887,8 @@
     "antonyms": [
       "apathetic",
       "indifferent",
-      "halfhearted"
+      "halfhearted",
+      "tepid"
     ]
   },
   {
@@ -13712,12 +14051,14 @@
       "stubborn",
       "intransigent",
       "headstrong",
-      "obdurate"
+      "obdurate",
+      "pertinacious"
     ],
     "antonyms": [
       "compliant",
       "amenable",
-      "flexible"
+      "flexible",
+      "pliant"
     ]
   },
   {
@@ -13754,7 +14095,8 @@
       "calm",
       "unemotional",
       "stolid",
-      "imperturbable"
+      "imperturbable",
+      "stoic"
     ],
     "antonyms": [
       "excitable",
@@ -13906,7 +14248,8 @@
     "antonyms": [
       "definite",
       "confident",
-      "final"
+      "final",
+      "magisterial"
     ]
   },
   {
@@ -13985,7 +14328,8 @@
       "shrewd",
       "sharp",
       "perceptive",
-      "canny"
+      "canny",
+      "sagacious"
     ],
     "antonyms": [
       "obtuse",
@@ -14048,7 +14392,8 @@
       "restrain",
       "check",
       "control",
-      "rein in"
+      "rein in",
+      "bridle"
     ],
     "antonyms": [
       "unleash",
@@ -14223,7 +14568,8 @@
     "antonyms": [
       "continuous",
       "constant",
-      "unceasing"
+      "unceasing",
+      "incessant"
     ]
   },
   {
@@ -14286,7 +14632,8 @@
     "antonyms": [
       "surge",
       "commotion",
-      "activity"
+      "activity",
+      "barrage"
     ]
   },
   {
@@ -14437,7 +14784,8 @@
     "antonyms": [
       "superficial",
       "shallow",
-      "trivial"
+      "trivial",
+      "glib"
     ]
   },
   {
@@ -14458,7 +14806,8 @@
     "antonyms": [
       "suppress",
       "contain",
-      "stifle"
+      "stifle",
+      "eradicate"
     ]
   },
   {
@@ -14537,7 +14886,8 @@
       "consequence",
       "aftermath",
       "effect",
-      "fallout"
+      "fallout",
+      "ramification"
     ],
     "antonyms": [
       "cause",
@@ -14584,7 +14934,9 @@
     "antonyms": [
       "negligent",
       "inattentive",
-      "careless"
+      "careless",
+      "complacent",
+      "lax"
     ]
   },
   {
@@ -14621,7 +14973,8 @@
       "kind",
       "charitable",
       "benign",
-      "compassionate"
+      "compassionate",
+      "beneficent"
     ],
     "antonyms": [
       "malevolent",
@@ -14642,7 +14995,9 @@
       "scold",
       "rebuke",
       "reprimand",
-      "upbraid"
+      "upbraid",
+      "castigate",
+      "lambaste"
     ],
     "antonyms": [
       "praise",
@@ -14663,7 +15018,9 @@
       "cheerful",
       "upbeat",
       "lighthearted",
-      "floating"
+      "floating",
+      "ebullient",
+      "resilient"
     ],
     "antonyms": [
       "gloomy",
@@ -14684,7 +15041,8 @@
       "support",
       "reinforce",
       "strengthen",
-      "prop up"
+      "prop up",
+      "bolster"
     ],
     "antonyms": [
       "undermine",
@@ -14705,7 +15063,8 @@
       "overlook",
       "excuse",
       "pardon",
-      "tolerate"
+      "tolerate",
+      "countenance"
     ],
     "antonyms": [
       "condemn",
@@ -14747,12 +15106,17 @@
       "condemn",
       "censure",
       "decry",
-      "vilify"
+      "vilify",
+      "excoriate",
+      "stigmatize"
     ],
     "antonyms": [
       "praise",
       "commend",
-      "endorse"
+      "endorse",
+      "acclaim",
+      "canonize",
+      "condone"
     ]
   },
   {
@@ -14836,7 +15200,8 @@
     "antonyms": [
       "de-escalate",
       "diminish",
-      "subside"
+      "subside",
+      "abate"
     ]
   },
   {
@@ -15253,7 +15618,8 @@
       "unfavorable",
       "harmful",
       "hostile",
-      "detrimental"
+      "detrimental",
+      "inimical"
     ],
     "antonyms": [
       "favorable",
@@ -15274,7 +15640,8 @@
       "seize",
       "commandeer",
       "usurp",
-      "expropriate"
+      "expropriate",
+      "apt"
     ],
     "antonyms": [
       "relinquish",
@@ -15717,12 +16084,15 @@
       "scanty",
       "scattered",
       "meager",
-      "thin"
+      "thin",
+      "scant"
     ],
     "antonyms": [
       "dense",
       "abundant",
-      "plentiful"
+      "plentiful",
+      "copious",
+      "profuse"
     ]
   },
   {
@@ -15738,7 +16108,8 @@
       "loyal",
       "unwavering",
       "resolute",
-      "staunch"
+      "staunch",
+      "stalwart"
     ],
     "antonyms": [
       "fickle",
@@ -15780,7 +16151,9 @@
       "boring",
       "monotonous",
       "dull",
-      "tiresome"
+      "tiresome",
+      "humdrum",
+      "plodding"
     ],
     "antonyms": [
       "exciting",
@@ -15822,7 +16195,9 @@
       "playful",
       "fanciful",
       "capricious",
-      "quirky"
+      "quirky",
+      "arbitrary",
+      "droll"
     ],
     "antonyms": [
       "serious",
@@ -15843,12 +16218,16 @@
       "surrender",
       "give way",
       "concede",
-      "produce"
+      "produce",
+      "acquiesce",
+      "relent"
     ],
     "antonyms": [
       "resist",
       "withstand",
-      "withhold"
+      "withhold",
+      "surmount",
+      "vanquish"
     ]
   },
   {
@@ -15887,7 +16266,8 @@
       "passionate",
       "fervent",
       "zealous",
-      "avid"
+      "avid",
+      "fervid"
     ],
     "antonyms": [
       "apathetic",
@@ -15992,7 +16372,8 @@
       "dogmatic",
       "rigid",
       "inflexible",
-      "ideological"
+      "ideological",
+      "pedantic"
     ],
     "antonyms": [
       "flexible",
@@ -16144,7 +16525,8 @@
     "antonyms": [
       "skeptical",
       "cynical",
-      "shrewd"
+      "shrewd",
+      "canny"
     ]
   },
   {
@@ -16160,7 +16542,8 @@
       "distinctive",
       "individual",
       "quirky",
-      "peculiar"
+      "peculiar",
+      "eccentric"
     ],
     "antonyms": [
       "conventional",
@@ -16181,7 +16564,8 @@
       "secondary",
       "accompanying",
       "minor",
-      "peripheral"
+      "peripheral",
+      "tangential"
     ],
     "antonyms": [
       "essential",
@@ -16265,12 +16649,18 @@
       "extravagant",
       "luxurious",
       "opulent",
-      "generous"
+      "generous",
+      "munificent",
+      "profuse"
     ],
     "antonyms": [
       "frugal",
       "meager",
-      "austere"
+      "austere",
+      "miserly",
+      "parsimonious",
+      "spartan",
+      "stinting"
     ]
   },
   {
@@ -16391,12 +16781,14 @@
       "calm",
       "peaceful",
       "tranquil",
-      "placid"
+      "placid",
+      "imperturbable"
     ],
     "antonyms": [
       "agitated",
       "turbulent",
-      "anxious"
+      "anxious",
+      "tempestuous"
     ]
   },
   {
@@ -16522,7 +16914,8 @@
     "antonyms": [
       "fertile",
       "fecund",
-      "productive"
+      "productive",
+      "fruitful"
     ]
   },
   {
@@ -16727,7 +17120,9 @@
       "arrogant",
       "proud",
       "disdainful",
-      "supercilious"
+      "supercilious",
+      "cavalier",
+      "imperious"
     ],
     "antonyms": [
       "humble",
@@ -16769,7 +17164,8 @@
       "unflappable",
       "calm",
       "composed",
-      "serene"
+      "serene",
+      "phlegmatic"
     ],
     "antonyms": [
       "excitable",
@@ -17000,7 +17396,8 @@
       "palpable",
       "concrete",
       "physical",
-      "real"
+      "real",
+      "corporeal"
     ],
     "antonyms": [
       "intangible",
