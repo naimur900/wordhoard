@@ -16,6 +16,14 @@ export function ChevronRight(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ChevronDown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m5 9 7 7 7-7" stroke="currentColor" />
+    </svg>
+  );
+}
+
 export function Close(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" {...props}>

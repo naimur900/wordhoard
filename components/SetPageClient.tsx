@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { getSetWords, wordId } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
-import PageShell, { SHELL_WIDTH } from "@/components/PageShell";
+import PageShell from "@/components/PageShell";
+import SetNav from "@/components/SetNav";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft } from "@/components/icons";
 
@@ -52,25 +53,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
 
   return (
     <>
-      {/* Full-bleed: the glass spans the viewport, its content keeps the grid. */}
-      <div className="veil sticky top-0 z-30 w-full">
-        <span className="veil-layers" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-        </span>
-        <div
-          className={`relative ${SHELL_WIDTH} pb-8 pt-[max(0.85rem,env(safe-area-inset-top))]`}
-        >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 font-sans text-sm text-ink/70 hover:text-ink dark:text-ink-dark/70 dark:hover:text-ink-dark"
-          >
-            <ChevronLeft className="h-4 w-4" /> Back to sets
-          </Link>
-        </div>
-      </div>
+      <SetNav setId={setId} />
 
       <PageShell padTop={false}>
         <div className="-mt-2 rounded-2xl border border-hairline bg-card/70 p-4 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/70">
