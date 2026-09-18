@@ -87,7 +87,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
       <SetNav setId={setId} />
 
       <PageShell padTop={false}>
-        <div className="-mt-2 rounded-2xl border border-hairline bg-card/70 p-4 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/70">
+        <div className="-mt-6 rounded-2xl border border-hairline bg-card/70 p-4 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/70">
           <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl dark:text-ink-dark">
             Set {setId}
           </h1>

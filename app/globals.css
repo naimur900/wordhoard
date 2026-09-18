@@ -93,7 +93,8 @@ body {
    positioning (sticky) is what the layers below are absolute against. */
 .veil {
   --veil-rgb: 239 233 218;
-  /* Every bar using this ends in a 2rem fade (`pb-8`) below its content. */
+  /* Height of the fade below the bar's content; must match the bar's bottom
+     padding (`pb-8` by default, `pb-12` with `[--veil-fade:3rem]`). */
   --veil-fade: 2rem;
   /* Own compositor layer: the bar moves with the scroll (and slides away)
      without repainting, which is what made it shiver on phones. */
@@ -126,35 +127,49 @@ body {
 }
 
 .veil-layers > i:nth-child(1) {
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.5) 35%, transparent 65%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.5) 35%, transparent 65%);
 }
 
 .veil-layers > i:nth-child(2) {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 75%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 75%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 20%, rgb(0 0 0 / 0.5) 55%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 20%, rgb(0 0 0 / 0.5) 55%, transparent 85%);
 }
 
 .veil-layers > i:nth-child(3) {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgb(0 0 0 / 0.5) 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgb(0 0 0 / 0.5) 75%, transparent 100%);
 }
 
 /* Tint — also the fallback wherever backdrop-filter is unsupported. Fully
    opaque behind the bar's content, whatever the bar's height, so nothing
-   shows through; it only dissolves across the fade strip. */
+   shows through; across the fade strip it dissolves on an ease-in-out curve
+   (a "scrim" gradient), which avoids the visible bands of a linear fade. */
 .veil-layers > i:nth-child(4) {
   background-image: linear-gradient(
     to bottom,
     rgb(var(--veil-rgb) / 1) 0%,
     rgb(var(--veil-rgb) / 1) calc(100% - var(--veil-fade)),
-    rgb(var(--veil-rgb) / 0.5) calc(100% - var(--veil-fade) * 0.4),
+    rgb(var(--veil-rgb) / 0.987) calc(100% - var(--veil-fade) * 0.919),
+    rgb(var(--veil-rgb) / 0.951) calc(100% - var(--veil-fade) * 0.845),
+    rgb(var(--veil-rgb) / 0.896) calc(100% - var(--veil-fade) * 0.775),
+    rgb(var(--veil-rgb) / 0.825) calc(100% - var(--veil-fade) * 0.710),
+    rgb(var(--veil-rgb) / 0.741) calc(100% - var(--veil-fade) * 0.647),
+    rgb(var(--veil-rgb) / 0.648) calc(100% - var(--veil-fade) * 0.588),
+    rgb(var(--veil-rgb) / 0.55) calc(100% - var(--veil-fade) * 0.529),
+    rgb(var(--veil-rgb) / 0.45) calc(100% - var(--veil-fade) * 0.471),
+    rgb(var(--veil-rgb) / 0.352) calc(100% - var(--veil-fade) * 0.412),
+    rgb(var(--veil-rgb) / 0.259) calc(100% - var(--veil-fade) * 0.353),
+    rgb(var(--veil-rgb) / 0.175) calc(100% - var(--veil-fade) * 0.290),
+    rgb(var(--veil-rgb) / 0.104) calc(100% - var(--veil-fade) * 0.225),
+    rgb(var(--veil-rgb) / 0.049) calc(100% - var(--veil-fade) * 0.155),
+    rgb(var(--veil-rgb) / 0.013) calc(100% - var(--veil-fade) * 0.081),
     rgb(var(--veil-rgb) / 0) 100%
   );
 }

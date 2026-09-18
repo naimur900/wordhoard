@@ -31,9 +31,9 @@ export default function SearchDock() {
       <div
         onFocusCapture={() => setFocused(true)}
         onBlurCapture={() => setFocused(false)}
-        // The bottom `pb-8` is the veil's fade, pulled back out of the flow so
+        // The bottom `pb-12` is the veil's fade, pulled back out of the flow so
         // it only covers content while the bar is stuck.
-        className={`veil pointer-events-none sticky top-0 z-30 -mb-8 w-full transition-transform duration-300 ease-out ${
+        className={`veil pointer-events-none sticky top-0 z-30 -mb-12 w-full [--veil-fade:3rem] transition-transform duration-300 ease-out ${
           hidden ? "-translate-y-full" : ""
         }`}
       >
@@ -49,7 +49,7 @@ export default function SearchDock() {
           <i />
         </span>
         <div
-          className={`relative ${SHELL_WIDTH} pb-8 pt-[max(1rem,env(safe-area-inset-top))]`}
+          className={`relative ${SHELL_WIDTH} pb-12 pt-[max(1rem,env(safe-area-inset-top))]`}
         >
           <div className="pointer-events-auto">
             <SearchBar />

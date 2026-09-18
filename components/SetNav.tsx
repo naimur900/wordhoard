@@ -66,7 +66,7 @@ export default function SetNav({ setId }: { setId: number }) {
       ref={barRef}
       onFocusCapture={() => setFocused(true)}
       onBlurCapture={() => setFocused(false)}
-      className={`veil sticky top-0 z-30 w-full transition-transform duration-300 ease-out ${
+      className={`veil sticky top-0 z-30 w-full [--veil-fade:3rem] transition-transform duration-300 ease-out ${
         hidden ? "-translate-y-full" : ""
       }`}
     >
@@ -78,7 +78,7 @@ export default function SetNav({ setId }: { setId: number }) {
       </span>
 
       <div
-        className={`relative ${SHELL_WIDTH} pb-8 pt-[max(0.85rem,env(safe-area-inset-top))]`}
+        className={`relative ${SHELL_WIDTH} pb-12 pt-[max(0.85rem,env(safe-area-inset-top))]`}
       >
         {/* Phone: back icon, search filling the middle, set switcher. Wider
             screens: equal side columns so the search sits truly centred. */}
