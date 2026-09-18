@@ -19,7 +19,7 @@ const NAMES: Record<VoiceGender, string[]> = {
     "samantha", "victoria", "karen", "moira", "tessa", "fiona", "veena", "kate",
     "serena", "allison", "ava", "susan", "zoe", "nicky", "zira", "aria", "jenny",
     "hazel", "libby", "sonia", "emma", "michelle", "catherine", "natasha", "clara",
-    "heera", "hortense",
+    "heera", "hortense", "flo", "sandy", "shelley", "kathy",
     // espeak-ng variants (Linux)
     "alicia", "andrea", "annie", "anika", "auntie", "belinda", "grandma", "linda",
     "steph",
@@ -28,7 +28,10 @@ const NAMES: Record<VoiceGender, string[]> = {
   male: [
     "alex", "tom", "oliver", "arthur", "aaron", "rishi", "gordon",
     "lee", "david", "mark", "guy", "george", "ryan", "james", "eric", "christopher",
-    "william", "liam", "roger",
+    "william", "liam", "roger", "eddy", "rocko", "grandpa", "junior", "ralph",
+    // Named so the voice list can label them, but kept out of the automatic
+    // choice (see AVOID).
+    "fred", "daniel",
     // espeak-ng variants (Linux)
     "adam", "andy", "benjamin", "caleb", "denis", "ed", "edward", "gene", "ian",
     "john", "marco", "max", "michael", "mike", "paul", "quincy", "reed", "rob",
@@ -48,14 +51,22 @@ function genderOf(voice: SpeechSynthesisVoice): VoiceGender | null {
   return null;
 }
 
-export function readVoiceGender(): VoiceGender {
+/**
+ * What the user picked: an automatic choice by gender (the best voice of that
+ * gender on whatever device this is), or one exact voice by its `voiceURI`.
+ * Plain "female"/"male" is also what earlier versions saved.
+ */
+export type VoicePref = VoiceGender | `voice:${string}`;
+
+export function readVoicePref(): VoicePref {
   if (typeof window === "undefined") return DEFAULT_GENDER;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return VOICE_GENDERS.includes(raw as VoiceGender) ? (raw as VoiceGender) : DEFAULT_GENDER;
-  } catch {
-    return DEFAULT_GENDER;
-  }
+    if (raw && (VOICE_GENDERS.includes(raw as VoiceGender) || raw.startsWith("voice:"))) {
+      return raw as VoicePref;
+    }
+  } catch {}
+  return DEFAULT_GENDER;
 }
 
 /**
@@ -97,6 +108,9 @@ const PREFERRED: Record<VoiceGender, string[]> = {
   ],
 };
 
+/** Muddy or heavy-sounding; still listed, but never chosen automatically. */
+const AVOID = ["fred", "daniel"];
+
 const matches = (voice: SpeechSynthesisVoice, name: string) =>
   new RegExp(`\\b${name}\\b`).test(voice.name.toLowerCase());
 
@@ -117,7 +131,9 @@ export function pickVoice(gender: VoiceGender): SpeechSynthesisVoice | null {
     if (found.length) return found.find((v) => v.lang === "en-US") ?? found[0];
   }
 
-  const ofGender = english.filter((v) => genderOf(v) === gender);
+  const ofGender = english.filter(
+    (v) => genderOf(v) === gender && !AVOID.some((n) => matches(v, n))
+  );
   return (
     ofGender.find((v) => v.lang === "en-US" && v.localService) ??
     ofGender.find((v) => v.lang === "en-US") ??
@@ -135,8 +151,14 @@ export function speak(
   const synth = window.speechSynthesis;
   synth.cancel();
 
-  const gender = readVoiceGender();
-  const voice = pickVoice(gender);
+  const pref = readVoicePref();
+  // A voice picked on another device, or one since uninstalled, falls back
+  // to the automatic choice of the same gender (female if unknown).
+  const chosen = pref.startsWith("voice:")
+    ? window.speechSynthesis.getVoices().find((v) => `voice:${v.voiceURI}` === pref)
+    : undefined;
+  const gender: VoiceGender = pref === "male" ? "male" : "female";
+  const voice = chosen ?? pickVoice(gender);
   const utterance = new SpeechSynthesisUtterance(text);
   if (voice) {
     utterance.voice = voice;
@@ -154,13 +176,13 @@ export function speak(
   synth.speak(utterance);
 }
 
-/** The saved male/female preference, kept in step across components and tabs. */
-export function useVoiceGender() {
-  const [gender, setGenderState] = useState<VoiceGender>(DEFAULT_GENDER);
+/** The saved voice preference, kept in step across components and tabs. */
+export function useVoicePref() {
+  const [pref, setPrefState] = useState<VoicePref>(DEFAULT_GENDER);
 
   useEffect(() => {
-    setGenderState(readVoiceGender());
-    const sync = () => setGenderState(readVoiceGender());
+    setPrefState(readVoicePref());
+    const sync = () => setPrefState(readVoicePref());
     window.addEventListener(CHANGE_EVENT, sync);
     window.addEventListener("storage", sync);
     return () => {
@@ -169,8 +191,8 @@ export function useVoiceGender() {
     };
   }, []);
 
-  const setGender = useCallback((next: VoiceGender) => {
-    setGenderState(next);
+  const setPref = useCallback((next: VoicePref) => {
+    setPrefState(next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
@@ -179,7 +201,83 @@ export function useVoiceGender() {
     window.dispatchEvent(new Event(CHANGE_EVENT));
   }, []);
 
-  return { gender, setGender };
+  return { pref, setPref };
+}
+
+/** macOS/iOS novelty voices (sound effects and songs, not speech). */
+const NOVELTY = new Set([
+  "albert", "bad news", "bahh", "bells", "boing", "bubbles", "cellos",
+  "good news", "jester", "organ", "superstar", "trinoids", "whisper", "wobble",
+  "zarvox", "deranged", "hysterical", "pipe organ", "princess",
+]);
+
+export type VoiceOption = {
+  /** Stored as the preference when this voice is picked. */
+  id: `voice:${string}`;
+  name: string;
+  /** Accent, e.g. "United States"; voices are grouped under it. */
+  region: string;
+  gender: VoiceGender | null;
+  /** Cloud voices (Google, Edge "Natural") need a connection to speak. */
+  online: boolean;
+};
+
+const REGION_ORDER = ["US", "GB", "AU", "CA", "IE", "IN", "NZ", "ZA"];
+
+/**
+ * Every English voice worth offering on this device, grouped by accent in a
+ * sensible order (US, UK, … then the rest alphabetically). Linux's espeak-ng
+ * pairs each accent with ~100 variants, so there only the US and British
+ * accents with the recommended variants are kept.
+ */
+export function listVoices(): VoiceOption[] {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return [];
+  const regionName = new Intl.DisplayNames(["en"], { type: "region" });
+  const espeakKeep = new Set(
+    [...PREFERRED.female, ...PREFERRED.male].filter((n) => !n.includes(" "))
+  );
+
+  const options = window.speechSynthesis
+    .getVoices()
+    .filter((v) => v.lang.toLowerCase().replace("_", "-").startsWith("en"))
+    .filter((v) => !NOVELTY.has(v.name.toLowerCase().replace(/\s*\(.*\)$/, "")))
+    .filter((v) => {
+      const [base, variant] = v.name.split("+");
+      if (variant === undefined) return true;
+      return /\((America|Great[ _]Britain)\)/.test(base) && espeakKeep.has(variant.toLowerCase());
+    })
+    .map((v): VoiceOption & { code: string } => {
+      const code = v.lang.replace("_", "-").split("-")[1]?.toUpperCase() ?? "";
+      let region = "English";
+      try {
+        region = (code && regionName.of(code)) || "English";
+      } catch {}
+      return {
+        id: `voice:${v.voiceURI}`,
+        // The accent is already the group heading, so drop it from the name:
+        // "Eddy (English (US))" → "Eddy", "English (America)+Annie" → "Annie".
+        name: v.name.includes("+")
+          ? v.name.split("+")[1]
+          : v.name.replace(/\s*\(English \(.*\)\)$/, ""),
+        region,
+        gender: genderOf(v),
+        online: !v.localService,
+        code,
+      };
+    });
+
+  const rank = (code: string) => {
+    const i = REGION_ORDER.indexOf(code);
+    return i === -1 ? REGION_ORDER.length : i;
+  };
+  return options
+    .sort(
+      (a, b) =>
+        rank(a.code) - rank(b.code) ||
+        a.region.localeCompare(b.region) ||
+        a.name.localeCompare(b.name)
+    )
+    .map(({ code: _code, ...option }) => option);
 }
 
 /** Speaks a word with the browser's built-in speech synthesis. */
