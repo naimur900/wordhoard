@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import ThemeProvider from "@/components/ThemeProvider";
+import ServiceWorker from "@/components/ServiceWorker";
 import "./globals.css";
 
 const DESCRIPTION =
@@ -96,6 +97,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen font-sans text-ink antialiased dark:text-ink-dark">
         <ThemeProvider>{children}</ThemeProvider>
+        <ServiceWorker />
       </body>
     </html>
   );

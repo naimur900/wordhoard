@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { getSetIds, getSetWords, wordId } from "@/lib/vocab";
@@ -11,6 +11,25 @@ import SetNav from "@/components/SetNav";
 import SearchBar from "@/components/SearchBar";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft, ChevronRight } from "@/components/icons";
+
+/**
+ * Reports `?open=`. Kept in its own Suspense boundary because reading search
+ * params opts whatever is above the nearest boundary out of static rendering —
+ * this way only this empty component waits for the client, and the set's
+ * cards still ship as prerendered HTML (which is what the offline cache holds).
+ *
+ * The value itself comes from `location`: on a prerendered page
+ * `useSearchParams()` came back without `open`, but it still changes whenever
+ * the URL does, so it serves as the signal to look again (a search result in
+ * the set already open only changes `?open=`).
+ */
+function OpenParam({ onChange }: { onChange: (open: string | null) => void }) {
+  const params = useSearchParams();
+  useEffect(() => {
+    onChange(new URLSearchParams(window.location.search).get("open"));
+  }, [params, onChange]);
+  return null;
+}
 
 export default function SetPageClient({ setId: setIdParam }: { setId: string }) {
   const setId = Number(setIdParam);
@@ -24,7 +43,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
   const [highlighted, setHighlighted] = useState<number | null>(null);
   const { ready, isKnown, toggle, countForSet } = useKnownWords();
   const { size } = useImageSize();
-  const open = useSearchParams().get("open");
+  const [open, setOpen] = useState<string | null>(null);
 
   // A ?open=<number> link (from search) scrolls to that word and flags it briefly.
   useEffect(() => {
@@ -63,6 +82,9 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
 
   return (
     <>
+      <Suspense fallback={null}>
+        <OpenParam onChange={setOpen} />
+      </Suspense>
       <SetNav setId={setId} />
 
       <PageShell padTop={false}>

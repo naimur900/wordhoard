@@ -15,6 +15,12 @@ import {
   useVoiceGender,
   type VoiceGender,
 } from "@/lib/useSpeech";
+import {
+  countSavedImages,
+  downloadImages,
+  imageUrls,
+  offlineSupported,
+} from "@/lib/offline";
 import { Close, Speaker } from "@/components/icons";
 
 const THEMES = [
@@ -96,6 +102,33 @@ export default function SettingsModal({
   function chooseVoice(next: VoiceGender) {
     setGender(next);
     speak("Pronunciation");
+  }
+
+  const [offline, setOffline] = useState<{
+    total: number;
+    saved: number;
+    status: "idle" | "downloading" | "failed";
+  } | null>(null);
+
+  useEffect(() => {
+    if (!offlineSupported()) return;
+    const urls = imageUrls();
+    countSavedImages(urls)
+      .then((saved) => setOffline({ total: urls.length, saved, status: "idle" }))
+      .catch(() => {});
+  }, []);
+
+  async function saveForOffline() {
+    const urls = imageUrls();
+    setOffline((o) => o && { ...o, status: "downloading" });
+    try {
+      const failed = await downloadImages(urls, (saved) =>
+        setOffline((o) => o && { ...o, saved })
+      );
+      setOffline((o) => o && { ...o, status: failed ? "failed" : "idle" });
+    } catch {
+      setOffline((o) => o && { ...o, status: "failed" });
+    }
   }
 
   const currentTheme = !mounted ? null : theme === "oled" ? "oled" : "system";
@@ -256,6 +289,59 @@ export default function SettingsModal({
             );
           })}
         </div>
+
+        {offline && (
+          <>
+            <h3 className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
+              Offline
+            </h3>
+            <div className="mt-2 rounded-xl border border-hairline p-3 dark:border-hairline-dark">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-sans text-sm font-semibold text-ink/75 dark:text-ink-dark/75">
+                    {offline.saved === offline.total
+                      ? "All pictures saved"
+                      : `${offline.saved} of ${offline.total} pictures saved`}
+                  </p>
+                  <p className="font-sans text-[11px] leading-tight text-ink/45 dark:text-ink-dark/45">
+                    {offline.status === "failed"
+                      ? "Some didn't download. Check your connection and try again."
+                      : offline.saved === offline.total
+                        ? "Every set works without a connection."
+                        : "Words work offline already; this adds every picture."}
+                  </p>
+                </div>
+                {offline.saved < offline.total && (
+                  <button
+                    type="button"
+                    onClick={saveForOffline}
+                    disabled={offline.status === "downloading"}
+                    className="shrink-0 rounded-full bg-stamp px-3.5 py-1.5 font-sans text-xs font-semibold text-paper transition-opacity disabled:opacity-60 dark:bg-stamp-dark dark:text-paper-dark"
+                  >
+                    {offline.status === "downloading"
+                      ? "Saving…"
+                      : offline.status === "failed"
+                        ? "Retry"
+                        : "Download all"}
+                  </button>
+                )}
+              </div>
+              <div
+                className="mt-2.5 h-1 w-full overflow-hidden rounded-full bg-hairline dark:bg-hairline-dark"
+                role="progressbar"
+                aria-label="Pictures saved for offline use"
+                aria-valuemin={0}
+                aria-valuemax={offline.total}
+                aria-valuenow={offline.saved}
+              >
+                <div
+                  className="h-full rounded-full bg-ledger transition-[width] duration-300 dark:bg-ledger-dark"
+                  style={{ width: `${(offline.saved / offline.total) * 100}%` }}
+                />
+              </div>
+            </div>
+          </>
+        )}
 
         {voiceNames && (
           <>

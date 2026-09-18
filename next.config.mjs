@@ -6,6 +6,11 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Always revalidated, so a new deploy's worker is picked up promptly.
+        source: "/sw.js",
+        headers: [{ key: "Cache-Control", value: "no-cache" }],
+      },
+      {
         source: "/images/:path*",
         headers: [
           {
