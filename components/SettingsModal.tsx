@@ -8,7 +8,14 @@ import {
   IMAGE_SIZE_LABELS,
   type ImageSize,
 } from "@/lib/useImageSize";
-import { Close } from "@/components/icons";
+import {
+  VOICE_GENDERS,
+  pickVoice,
+  speak,
+  useVoiceGender,
+  type VoiceGender,
+} from "@/lib/useSpeech";
+import { Close, Speaker } from "@/components/icons";
 
 const THEMES = [
   {
@@ -24,6 +31,11 @@ const THEMES = [
     swatch: "bg-black",
   },
 ] as const;
+
+const VOICE_LABELS: Record<VoiceGender, string> = {
+  female: "Female",
+  male: "Male",
+};
 
 /** Preview block, scaled the way the real thumbnail is. */
 const PREVIEW: Record<ImageSize, string> = {
@@ -61,6 +73,30 @@ export default function SettingsModal({
   // The stored theme is only knowable on the client; wait for mount so the
   // selected state never disagrees with the server-rendered markup.
   useEffect(() => setMounted(true), []);
+
+  const { gender, setGender } = useVoiceGender();
+  // The name of the voice each option will actually use, or null when this
+  // device has none of that gender. Voices arrive asynchronously, so refresh
+  // on `voiceschanged` as well as on mount.
+  const [voiceNames, setVoiceNames] = useState<Record<VoiceGender, string | null> | null>(null);
+
+  useEffect(() => {
+    if (!("speechSynthesis" in window)) return;
+    const synth = window.speechSynthesis;
+    const update = () =>
+      setVoiceNames({
+        female: pickVoice("female")?.name ?? null,
+        male: pickVoice("male")?.name ?? null,
+      });
+    update();
+    synth.addEventListener("voiceschanged", update);
+    return () => synth.removeEventListener("voiceschanged", update);
+  }, []);
+
+  function chooseVoice(next: VoiceGender) {
+    setGender(next);
+    speak("Pronunciation");
+  }
 
   const currentTheme = !mounted ? null : theme === "oled" ? "oled" : "system";
 
@@ -220,6 +256,56 @@ export default function SettingsModal({
             );
           })}
         </div>
+
+        {voiceNames && (
+          <>
+            <h3 className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
+              Pronunciation voice
+            </h3>
+            <div className="mt-2 grid grid-cols-2 gap-2.5">
+              {VOICE_GENDERS.map((option) => {
+                const selected = gender === option;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => chooseVoice(option)}
+                    aria-pressed={selected}
+                    className={`flex items-center gap-3 rounded-xl border p-3 text-left transition-colors ${
+                      selected
+                        ? "border-stamp/50 bg-stamp/10 dark:border-stamp-dark/50 dark:bg-stamp-dark/10"
+                        : "border-hairline hover:border-ink/25 dark:border-hairline-dark dark:hover:border-ink-dark/25"
+                    }`}
+                  >
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ring-1 ring-inset ${
+                        selected
+                          ? "bg-stamp/15 text-stamp ring-stamp/25 dark:bg-stamp-dark/15 dark:text-stamp-dark dark:ring-stamp-dark/25"
+                          : "bg-ink/5 text-ink/50 ring-ink/15 dark:bg-ink-dark/5 dark:text-ink-dark/50 dark:ring-ink-dark/20"
+                      }`}
+                    >
+                      <Speaker className="h-[18px] w-[18px]" />
+                    </span>
+                    <span className="min-w-0">
+                      <span
+                        className={`block font-sans text-sm font-semibold ${
+                          selected
+                            ? "text-stamp dark:text-stamp-dark"
+                            : "text-ink/75 dark:text-ink-dark/75"
+                        }`}
+                      >
+                        {VOICE_LABELS[option]}
+                      </span>
+                      <span className="block truncate font-sans text-[11px] leading-tight text-ink/45 dark:text-ink-dark/45">
+                        {voiceNames[option] ?? "Default voice, re-pitched"}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
