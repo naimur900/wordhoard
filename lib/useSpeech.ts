@@ -26,7 +26,7 @@ const NAMES: Record<VoiceGender, string[]> = {
     "google us english",
   ],
   male: [
-    "alex", "daniel", "tom", "oliver", "arthur", "aaron", "rishi", "gordon",
+    "alex", "tom", "oliver", "arthur", "aaron", "rishi", "gordon",
     "lee", "david", "mark", "guy", "george", "ryan", "james", "eric", "christopher",
     "william", "liam", "roger",
     // espeak-ng variants (Linux)
@@ -84,13 +84,14 @@ const PREFERRED: Record<VoiceGender, string[]> = {
   male: [
     "microsoft guy online", "microsoft andrew online", "microsoft christopher online",
     "microsoft eric online", "microsoft brian online",
-    // Daniel ships with every Mac and iPhone; the others above it are
-    // optional downloads. Fred is left out on purpose: it is Apple's
-    // decades-old synthesiser and sounds muddy.
-    "alex", "aaron", "tom", "daniel",
+    // Fred (muddy) and Daniel (heavy) are left out on purpose, although
+    // both ship with every Mac. Alex, Aaron and Tom are optional downloads;
+    // without them Safari lands on Rishi, then Apple's clear US voices
+    // Eddy and Reed.
+    "alex", "aaron", "tom",
     "microsoft david", "microsoft mark",
     "google uk english male",
-    "oliver", "arthur", "gordon", "rishi",
+    "oliver", "arthur", "gordon", "rishi", "eddy", "reed",
     "microsoft george",
     "michael", "male2", "male3", "david",
   ],
