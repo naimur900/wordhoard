@@ -93,9 +93,11 @@ body {
    positioning (sticky) is what the layers below are absolute against. */
 .veil {
   --veil-rgb: 239 233 218;
-  /* Height of the fade below the bar's content; must match the bar's bottom
-     padding (`pb-8` by default, `pb-12` with `[--veil-fade:3rem]`). */
+  /* Height of the fade below the bar's content; matches the bars' `pb-8`. */
   --veil-fade: 2rem;
+  /* Glass strength, 0–1. Scales the blur radii and the tint together so the
+     glass can dissolve gradually (see SearchDock) instead of snapping off. */
+  --veil-k: 1;
   /* Own compositor layer: the bar moves with the scroll (and slides away)
      without repainting, which is what made it shiver on phones. */
   will-change: transform;
@@ -127,22 +129,22 @@ body {
 }
 
 .veil-layers > i:nth-child(1) {
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(calc(16px * var(--veil-k))) saturate(calc(100% + 40% * var(--veil-k)));
+  -webkit-backdrop-filter: blur(calc(16px * var(--veil-k))) saturate(calc(100% + 40% * var(--veil-k)));
   mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.5) 35%, transparent 65%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.5) 35%, transparent 65%);
 }
 
 .veil-layers > i:nth-child(2) {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(calc(8px * var(--veil-k)));
+  -webkit-backdrop-filter: blur(calc(8px * var(--veil-k)));
   mask-image: linear-gradient(to bottom, #000 0%, #000 20%, rgb(0 0 0 / 0.5) 55%, transparent 85%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 20%, rgb(0 0 0 / 0.5) 55%, transparent 85%);
 }
 
 .veil-layers > i:nth-child(3) {
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(calc(3px * var(--veil-k)));
+  -webkit-backdrop-filter: blur(calc(3px * var(--veil-k)));
   mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgb(0 0 0 / 0.5) 75%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgb(0 0 0 / 0.5) 75%, transparent 100%);
 }
@@ -152,6 +154,8 @@ body {
    shows through; across the fade strip it dissolves on an ease-in-out curve
    (a "scrim" gradient), which avoids the visible bands of a linear fade. */
 .veil-layers > i:nth-child(4) {
+  /* Safe here: this layer has no backdrop-filter to switch off. */
+  opacity: var(--veil-k);
   background-image: linear-gradient(
     to bottom,
     rgb(var(--veil-rgb) / 1) 0%,
