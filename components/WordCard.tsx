@@ -4,7 +4,8 @@ import type { VocabEntry } from "@/lib/types";
 import type { ImageSize } from "@/lib/useImageSize";
 import { splitAroundWord } from "@/lib/vocab";
 import WordImage from "@/components/WordImage";
-import { Stamp, Alert } from "@/components/icons";
+import { Stamp, Alert, Speaker } from "@/components/icons";
+import { useSpeech } from "@/lib/useSpeech";
 
 function ChipRow({
   label,
@@ -111,6 +112,7 @@ export default function WordCard({
   const pos = partsOfSpeech(entry.part_of_speech);
   const accent = POS_ACCENT[pos[0]] ?? POS_FALLBACK;
   const example = entry.example_sentence?.trim();
+  const speech = useSpeech(entry.word);
   const hasDetail =
     entry.synonyms.length > 0 || entry.antonyms.length > 0 || confused.length > 0;
 
@@ -142,13 +144,33 @@ export default function WordCard({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
-            <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
               {/* Two-up cards are narrowest just past 640px, where a long word
                   can outrun its column — hyphenate there rather than snapping a
                   letter onto its own line, and save the larger type for `lg:`. */}
-              <h3 className="min-w-0 hyphens-auto break-words font-serif text-lg font-semibold leading-tight text-ink lg:text-xl dark:text-ink-dark">
-                {entry.word}
-              </h3>
+              {/* The speaker rides with the word so it never wraps onto a line
+                  of its own; its negative margin keeps the 28px tap target
+                  from making the title row any taller. */}
+              <div className="flex min-w-0 items-center gap-1">
+                <h3 className="min-w-0 hyphens-auto break-words font-serif text-lg font-semibold leading-tight text-ink lg:text-xl dark:text-ink-dark">
+                  {entry.word}
+                </h3>
+                {speech.supported && (
+                  <button
+                    type="button"
+                    onClick={speech.speak}
+                    aria-label={`Pronounce ${entry.word}`}
+                    title="Pronounce"
+                    className={`-my-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-ink/5 dark:hover:bg-ink-dark/5 ${
+                      speech.speaking
+                        ? accent.word
+                        : "text-ink/35 hover:text-ink/70 dark:text-ink-dark/35 dark:hover:text-ink-dark/70"
+                    }`}
+                  >
+                    <Speaker className={`h-4 w-4 ${speech.speaking ? "animate-pulse" : ""}`} />
+                  </button>
+                )}
+              </div>
               {pos.map((part) => (
                 <span
                   key={part}
