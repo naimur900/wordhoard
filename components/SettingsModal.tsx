@@ -38,6 +38,13 @@ const THEMES = [
   },
 ] as const;
 
+/** Every label the download button can show; see the button for why. */
+const DOWNLOAD_LABELS = {
+  idle: "Download all",
+  downloading: "Saving…",
+  failed: "Retry",
+} as const;
+
 const VOICE_LABELS: Record<VoiceGender, string> = {
   female: "Female",
   male: "Male",
@@ -298,7 +305,7 @@ export default function SettingsModal({
             <div className="mt-2 rounded-xl border border-hairline p-3 dark:border-hairline-dark">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="font-sans text-sm font-semibold text-ink/75 dark:text-ink-dark/75">
+                  <p className="font-sans text-sm font-semibold tabular-nums text-ink/75 dark:text-ink-dark/75">
                     {offline.saved === offline.total
                       ? "All pictures saved"
                       : `${offline.saved} of ${offline.total} pictures saved`}
@@ -316,13 +323,21 @@ export default function SettingsModal({
                     type="button"
                     onClick={saveForOffline}
                     disabled={offline.status === "downloading"}
-                    className="shrink-0 rounded-full bg-stamp px-3.5 py-1.5 font-sans text-xs font-semibold text-paper transition-opacity disabled:opacity-60 dark:bg-stamp-dark dark:text-paper-dark"
+                    // All labels share one grid cell, so the button is always
+                    // as wide as the longest; swapping labels mid-download
+                    // would otherwise resize it and reflow the text beside it.
+                    className="grid shrink-0 rounded-full bg-stamp px-3.5 py-1.5 font-sans text-xs font-semibold text-paper transition-opacity disabled:opacity-60 dark:bg-stamp-dark dark:text-paper-dark"
                   >
-                    {offline.status === "downloading"
-                      ? "Saving…"
-                      : offline.status === "failed"
-                        ? "Retry"
-                        : "Download all"}
+                    {Object.entries(DOWNLOAD_LABELS).map(([status, label]) => (
+                      <span
+                        key={status}
+                        className={`col-start-1 row-start-1 ${
+                          status === offline.status ? "" : "invisible"
+                        }`}
+                      >
+                        {label}
+                      </span>
+                    ))}
                   </button>
                 )}
               </div>
