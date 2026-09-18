@@ -25,6 +25,8 @@ export default function SearchBar() {
   function goTo(setId: number, number: number) {
     setOpen(false);
     setQuery("");
+    // Drop focus so the next search reopens the list (and mobile keyboards close).
+    (document.activeElement as HTMLElement | null)?.blur();
     router.push(`/sets/${setId}?open=${number}`);
   }
 
@@ -34,7 +36,10 @@ export default function SearchBar() {
         <Search className="h-4 w-4 shrink-0 text-ink/40 dark:text-ink-dark/40" />
         <input
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setOpen(true);
+          }}
           onFocus={handleFocus}
           onBlur={handleBlur}
           type="text"

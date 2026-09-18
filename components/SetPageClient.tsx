@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { getSetIds, getSetWords, wordId } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import SetNav from "@/components/SetNav";
+import SearchBar from "@/components/SearchBar";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft, ChevronRight } from "@/components/icons";
 
@@ -22,10 +24,10 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
   const [highlighted, setHighlighted] = useState<number | null>(null);
   const { ready, isKnown, toggle, countForSet } = useKnownWords();
   const { size } = useImageSize();
+  const open = useSearchParams().get("open");
 
   // A ?open=<number> link (from search) scrolls to that word and flags it briefly.
   useEffect(() => {
-    const open = new URLSearchParams(window.location.search).get("open");
     if (!open) return;
     const number = Number(open);
     if (!words.some((w) => w.number === number)) return;
@@ -36,9 +38,9 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
       ?.scrollIntoView({ block: "center", behavior: "smooth" });
     const timer = setTimeout(() => setHighlighted(null), 2200);
     return () => clearTimeout(timer);
-    // Only run once, when the word list for this set is ready.
+    // Re-runs when a search result within this same set changes ?open.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [words.length]);
+  }, [words.length, open]);
 
   if (!words.length) {
     return (
@@ -77,6 +79,10 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
               style={{ width: `${Math.round(progress * 100)}%` }}
             />
           </div>
+        </div>
+
+        <div className="mt-4">
+          <SearchBar />
         </div>
 
         <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
