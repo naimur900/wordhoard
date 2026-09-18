@@ -8,7 +8,6 @@ import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import SetNav from "@/components/SetNav";
-import SearchBar from "@/components/SearchBar";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft, ChevronRight } from "@/components/icons";
 
@@ -101,10 +100,6 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
               style={{ width: `${Math.round(progress * 100)}%` }}
             />
           </div>
-        </div>
-
-        <div className="mt-4">
-          <SearchBar />
         </div>
 
         <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">

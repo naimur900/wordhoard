@@ -93,6 +93,11 @@ body {
    positioning (sticky) is what the layers below are absolute against. */
 .veil {
   --veil-rgb: 239 233 218;
+  /* Every bar using this ends in a 2rem fade (`pb-8`) below its content. */
+  --veil-fade: 2rem;
+  /* Own compositor layer: the bar moves with the scroll (and slides away)
+     without repainting, which is what made it shiver on phones. */
+  will-change: transform;
 }
 
 .dark .veil,
@@ -112,36 +117,53 @@ body {
   display: block;
 }
 
+/* The blur layers only live in the bottom fade strip. Above it the tint is
+   solid anyway, and blurring a tall area on every scroll frame is costly on
+   phones. */
+.veil-layers > i:nth-child(-n + 3) {
+  top: auto;
+  height: var(--veil-fade);
+}
+
 .veil-layers > i:nth-child(1) {
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 34%, transparent 60%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 34%, transparent 60%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 55%);
 }
 
 .veil-layers > i:nth-child(2) {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 80%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 80%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 75%);
 }
 
 .veil-layers > i:nth-child(3) {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
 }
 
-/* Tint — also the fallback wherever backdrop-filter is unsupported. */
+/* Tint — also the fallback wherever backdrop-filter is unsupported. Fully
+   opaque behind the bar's content, whatever the bar's height, so nothing
+   shows through; it only dissolves across the fade strip. */
 .veil-layers > i:nth-child(4) {
   background-image: linear-gradient(
     to bottom,
     rgb(var(--veil-rgb) / 1) 0%,
-    rgb(var(--veil-rgb) / 0.92) 48%,
-    rgb(var(--veil-rgb) / 0.5) 74%,
+    rgb(var(--veil-rgb) / 1) calc(100% - var(--veil-fade)),
+    rgb(var(--veil-rgb) / 0.5) calc(100% - var(--veil-fade) * 0.4),
     rgb(var(--veil-rgb) / 0) 100%
   );
+}
+
+/* Scrollable dropdown lists: items dissolve into the bottom edge while more
+   are waiting below (toggled off once scrolled to the end). */
+.fade-bottom {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
 }
 
 /* Respect reduced motion preferences everywhere */
