@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -27,6 +27,12 @@ import {
 
 /** setup → the length picker, running → one question at a time, review → marked. */
 type Phase = "setup" | "running" | "review";
+
+/**
+ * The state on the spare history entry that guards a running test. It exists
+ * only so the browser's Back button has something harmless to land on.
+ */
+const BACK_GUARD = { wordhoardTestGuard: true };
 
 const COUNT_HINTS: Record<QuestionCount, string> = {
   10: "A quick check",
@@ -131,6 +137,8 @@ export default function TestClient() {
   const [showScore, setShowScore] = useState(false);
   const [confirm, setConfirm] = useState<ConfirmRequest | null>(null);
   const router = useRouter();
+  /** Whether the spare history entry is currently on the stack. */
+  const guardRef = useRef(false);
 
   const start = useCallback((length: QuestionCount) => {
     setCount(length);
@@ -196,19 +204,59 @@ export default function TestClient() {
     });
   }
 
+  const confirmLeave = useCallback(
+    (depart: () => void) => {
+      setConfirm({
+        title: "Leave the test?",
+        body: `You are ${index + 1} of ${questions.length} questions in. Nothing is saved, so this test will be gone.`,
+        confirmLabel: "Leave test",
+        cancelLabel: "Stay",
+        onConfirm: depart,
+      });
+    },
+    [index, questions.length]
+  );
+
   // The modal cannot answer in time for a click handler, so the Link's own
   // navigation is always cancelled and `router.push` replays it on confirm.
   function leave(e: React.MouseEvent) {
     if (phase !== "running") return;
     e.preventDefault();
-    setConfirm({
-      title: "Leave the test?",
-      body: `You are ${index + 1} of ${questions.length} questions in. Nothing is saved, so this test will be gone.`,
-      confirmLabel: "Leave test",
-      cancelLabel: "Stay",
-      onConfirm: () => router.push("/"),
-    });
+    confirmLeave(() => router.push("/"));
   }
+
+  // A spare history entry, pushed when the test starts, so the Back button has
+  // somewhere to land that is still this page. Without it the browser leaves
+  // before any click handler — and so before any modal — can run.
+  useEffect(() => {
+    if (phase !== "running" || guardRef.current) return;
+    window.history.pushState(BACK_GUARD, "");
+    guardRef.current = true;
+  }, [phase]);
+
+  useEffect(() => {
+    function onPopState() {
+      // Someone popped an entry that was not ours: a real navigation, already
+      // under way. Leave it alone.
+      if (!guardRef.current) return;
+      guardRef.current = false;
+
+      // The test is over, so there is nothing left to protect — carry on with
+      // the Back the reader actually asked for.
+      if (phase !== "running") {
+        window.history.back();
+        return;
+      }
+
+      // Put the guard back, which holds us on this page, and then ask.
+      window.history.pushState(BACK_GUARD, "");
+      guardRef.current = true;
+      confirmLeave(() => router.push("/"));
+    }
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [phase, confirmLeave, router]);
 
   const progress =
     phase === "setup"
@@ -220,7 +268,11 @@ export default function TestClient() {
           : 0;
 
   return (
-    <>
+    // A column the height of the viewport, so a short page (the length picker)
+    // can still push its footer to the bottom edge instead of leaving it
+    // stranded under the card. The sticky bar stays sticky as a flex item:
+    // this wrapper is the page-height containing block it sticks within.
+    <div className="flex min-h-svh flex-col">
       <div className="veil sticky top-0 z-30 w-full">
         <span className="veil-layers" aria-hidden="true">
           <i />
@@ -257,7 +309,7 @@ export default function TestClient() {
         </div>
       </div>
 
-      <PageShell padTop={false}>
+      <PageShell padTop={false} className="flex flex-1 flex-col">
         {phase !== "setup" && (
           <div className="-mt-3 h-1 w-full overflow-hidden rounded-full bg-hairline dark:bg-hairline-dark">
             <div
@@ -522,12 +574,16 @@ export default function TestClient() {
                 );
               })}
             </ol>
-
-            <SiteFooter />
           </>
         )}
 
-        {phase === "setup" && <SiteFooter />}
+        {/* `mt-auto` eats the free space on a short page and resolves to zero
+            on a long one, where the footer's own margin sets the gap. */}
+        {phase !== "running" && (
+          <div className="mt-auto">
+            <SiteFooter />
+          </div>
+        )}
       </PageShell>
 
       {confirm && (
@@ -543,6 +599,6 @@ export default function TestClient() {
           onClose={() => setShowScore(false)}
         />
       )}
-    </>
+    </div>
   );
 }
