@@ -29,10 +29,21 @@ function ChipRow({
   self: string;
   onPick?: (entry: VocabEntry) => void;
 }) {
-  const chip =
+  const fill =
     tone === "ledger"
-      ? "bg-ledger/10 text-ledger ring-ledger/20 dark:bg-ledger-dark/10 dark:text-ledger-dark dark:ring-ledger-dark/25"
-      : "bg-stamp/10 text-stamp ring-stamp/20 dark:bg-stamp-dark/10 dark:text-stamp-dark dark:ring-stamp-dark/25";
+      ? "bg-ledger/10 text-ledger dark:bg-ledger-dark/10 dark:text-ledger-dark"
+      : "bg-stamp/10 text-stamp dark:bg-stamp-dark/10 dark:text-stamp-dark";
+  // A plain chip keeps its solid hairline; one you can open wears a dotted one.
+  // Both are drawn outside the box — a ring, then an inset outline — so the two
+  // kinds of chip sit at exactly the same height in a row.
+  const edge =
+    tone === "ledger"
+      ? "ring-1 ring-inset ring-ledger/20 dark:ring-ledger-dark/25"
+      : "ring-1 ring-inset ring-stamp/20 dark:ring-stamp-dark/25";
+  const dottedEdge =
+    tone === "ledger"
+      ? "outline-dotted outline-1 -outline-offset-1 outline-ledger/55 dark:outline-ledger-dark/60"
+      : "outline-dotted outline-1 -outline-offset-1 outline-stamp/55 dark:outline-stamp-dark/60";
   // What a chip you can open looks like: a halo in its own hue, lit faintly at
   // rest so touch users can see it too, and brighter under the pointer. The
   // light values are the literal ledger/stamp hex; dark reads the live token,
@@ -48,13 +59,10 @@ function ChipRow({
         {label}
       </span>
       {items.map((item) => {
-        // Only the chips that are themselves headwords open anything; the rest
-        // ("be scarce", "lavish") stay plain text, and the halo plus the dotted
-        // underline are what tell the two apart before anyone hovers.
         const target = onPick ? findWord(item) : null;
         const linkable =
           target && target.word.toLowerCase() !== self.toLowerCase();
-        const shape = `rounded-full px-2.5 py-0.5 font-sans text-xs ring-1 ring-inset ${chip}`;
+        const shape = `rounded-full px-2.5 py-0.5 font-sans text-xs ${fill}`;
 
         return linkable ? (
           <button
@@ -62,12 +70,12 @@ function ChipRow({
             type="button"
             onClick={() => onPick?.(target)}
             title={`Look up ${target.word}`}
-            className={`${shape} ${glow} underline decoration-dotted underline-offset-[1.5px] transition duration-200`}
+            className={`${shape} ${dottedEdge} ${glow} transition duration-200`}
           >
             {item}
           </button>
         ) : (
-          <span key={item} className={shape}>
+          <span key={item} className={`${shape} ${edge}`}>
             {item}
           </span>
         );
