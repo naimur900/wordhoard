@@ -103,3 +103,19 @@ export function searchWords(query: string, limit = 40): VocabEntry[] {
   }
   return [...starts, ...contains].slice(0, limit);
 }
+
+/**
+ * Headwords by lowercased spelling, so a synonym or antonym can be matched
+ * against the vocabulary in constant time. One word ("cumbersome") appears in
+ * two sets; the first entry wins, which keeps the lookup stable.
+ */
+const BY_WORD = new Map<string, VocabEntry>();
+for (const entry of ALL_WORDS) {
+  const key = entry.word.trim().toLowerCase();
+  if (!BY_WORD.has(key)) BY_WORD.set(key, entry);
+}
+
+/** The entry for a word, or null when it is not one of the 810 headwords. */
+export function findWord(word: string): VocabEntry | null {
+  return BY_WORD.get(word.trim().toLowerCase()) ?? null;
+}
