@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black",
     title: "Wordhoard",
   },
   formatDetection: { telephone: false },

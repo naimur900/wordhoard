@@ -9,7 +9,7 @@
  *
  * Bump VERSION to force every installed copy to re-save its pages.
  */
-const VERSION = "v1";
+const VERSION = "v5";
 const PAGES = `wordhoard-pages-${VERSION}`;
 const ASSETS = `wordhoard-assets-${VERSION}`;
 const FONTS = "wordhoard-fonts";
