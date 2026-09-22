@@ -2,9 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Scroll distance that counts as a deliberate change of direction, so small
-// jitters (trackpad inertia, iOS bounce) don't flicker the bar.
+// Scroll-up distance that brings the bar back, so small jitters (trackpad
+// inertia, iOS bounce) don't flicker it.
 const DIRECTION_THRESHOLD = 8;
+
+// Scroll-down distance, in one continuous run, before the bar slides away:
+// it lingers a moment instead of vanishing on the first flick.
+const HIDE_AFTER = 48;
+
+/** The bars' slide, shared so they all move alike: slow, easing to a stop. */
+export const HIDE_TRANSITION =
+  "transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 // Only phones trade the bar for reading room; wider screens keep it pinned.
 const PHONE = "(max-width: 639px)";
@@ -29,6 +37,9 @@ export function useHideOnScroll(canHide: () => boolean, pinned: boolean) {
 
   useEffect(() => {
     let lastY = window.scrollY;
+    // Where the current run of scrolling in one direction began.
+    let runStart = lastY;
+    let goingDown = false;
     let frame = 0;
 
     function update() {
@@ -40,11 +51,17 @@ export function useHideOnScroll(canHide: () => boolean, pinned: boolean) {
       const canHide = canHideRef.current(); // always run: callers track state in it
       if (!canHide || pinnedRef.current || !window.matchMedia(PHONE).matches) {
         setHidden(false);
-        lastY = y;
-      } else if (Math.abs(y - lastY) > DIRECTION_THRESHOLD) {
-        setHidden(y > lastY);
-        lastY = y;
+        runStart = y;
+      } else if (y !== lastY) {
+        const down = y > lastY;
+        if (down !== goingDown) {
+          goingDown = down;
+          runStart = lastY;
+        }
+        if (down && y - runStart > HIDE_AFTER) setHidden(true);
+        if (!down && runStart - y > DIRECTION_THRESHOLD) setHidden(false);
       }
+      lastY = y;
     }
 
     function schedule() {

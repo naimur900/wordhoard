@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useHideOnScroll } from "@/lib/useHideOnScroll";
+import { HIDE_TRANSITION, useHideOnScroll } from "@/lib/useHideOnScroll";
 import { SHELL_WIDTH } from "@/components/PageShell";
 import SearchBar from "@/components/SearchBar";
 
@@ -42,7 +42,7 @@ export default function SearchDock() {
         // The bottom `pb-8` is the veil's fade, pulled back out of the flow so
         // it only covers content while the bar is stuck. `--veil-k` starts at
         // 0 (no glass at rest) and is driven by the scroll above.
-        className={`veil pointer-events-none sticky top-0 z-30 -mb-8 w-full [--veil-k:0] transition-transform duration-300 ease-out ${
+        className={`veil pointer-events-none sticky top-0 z-30 -mb-8 w-full [--veil-k:0] ${HIDE_TRANSITION} ${
           hidden ? "-translate-y-full" : ""
         }`}
       >

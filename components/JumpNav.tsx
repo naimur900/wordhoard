@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useHideOnScroll } from "@/lib/useHideOnScroll";
+import { HIDE_TRANSITION, useHideOnScroll } from "@/lib/useHideOnScroll";
 import { fadeClass, useScrollFades } from "@/lib/useScrollFade";
 import { SHELL_WIDTH } from "@/components/PageShell";
 import SearchBar from "@/components/SearchBar";
@@ -91,7 +91,7 @@ export default function JumpNav({
       ref={barRef}
       onFocusCapture={() => setFocused(true)}
       onBlurCapture={() => setFocused(false)}
-      className={`veil sticky top-0 z-30 w-full transition-transform duration-300 ease-out ${
+      className={`veil sticky top-0 z-30 w-full ${HIDE_TRANSITION} ${
         hidden ? "-translate-y-full" : ""
       }`}
     >
