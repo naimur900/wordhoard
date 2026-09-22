@@ -12,6 +12,7 @@ export default function GroupRow({
   count,
   known,
   ready,
+  accent = false,
   index = 0,
 }: {
   href: string;
@@ -22,6 +23,8 @@ export default function GroupRow({
   count: number;
   known: number;
   ready: boolean;
+  /** Set the title in the accent colour rather than plain ink. */
+  accent?: boolean;
   /** Position in the list, used to stagger the entrance animation. */
   index?: number;
 }) {
@@ -57,7 +60,13 @@ export default function GroupRow({
         <span className="min-w-0 flex-1">
           <span className="flex items-baseline justify-between gap-2">
             {/* Wraps rather than truncates, so long category names stay whole. */}
-            <span className="font-serif text-lg font-semibold leading-snug text-ink dark:text-ink-dark">
+            <span
+              className={`font-serif text-lg font-semibold leading-snug ${
+                accent
+                  ? "text-stamp dark:text-stamp-dark"
+                  : "text-ink dark:text-ink-dark"
+              }`}
+            >
               {title}
             </span>
             <span className="shrink-0 font-sans text-xs tabular-nums text-ink/50 dark:text-ink-dark/50">

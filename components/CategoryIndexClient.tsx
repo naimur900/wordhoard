@@ -35,6 +35,7 @@ export default function CategoryIndexClient() {
               title={category.name}
               sample={category.sample}
               count={category.count}
+              accent
               known={category.words.filter((w) => isKnown(wordId(w))).length}
               ready={ready}
               index={i}
