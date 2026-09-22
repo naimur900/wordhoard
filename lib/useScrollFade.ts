@@ -3,17 +3,10 @@
 import { useEffect, useState, type RefObject } from "react";
 
 /**
- * Whether a scrollable list still has content below its visible edge, so it
- * can fade that edge out (the `fade-bottom` class). Tracks scrolling, resizes
- * and the list's items changing. `active` is whether the list is mounted.
- *
- * `useScrollFades` reports the top edge too; see `fadeClass`.
+ * Which edges of a scrollable list have more content beyond them, so it can
+ * fade those edges out (see `fadeClass`). Tracks scrolling, resizes and the
+ * list's items changing. `active` is whether the list is mounted.
  */
-export function useScrollFade(ref: RefObject<HTMLElement | null>, active: boolean) {
-  return useScrollFades(ref, active).bottom;
-}
-
-/** Which edges of a scrollable list have more content beyond them. */
 export function useScrollFades(ref: RefObject<HTMLElement | null>, active: boolean) {
   const [fade, setFade] = useState({ top: false, bottom: false });
 

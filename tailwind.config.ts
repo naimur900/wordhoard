@@ -1,9 +1,9 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // `dark:` utilities fire for both the paper-dark theme and the OLED one;
-  // what separates them is the value behind each --*-dark token (globals.css).
-  darkMode: ["variant", ["&:where(.dark, .dark *)", "&:where(.oled, .oled *)"]],
+  // `dark:` utilities fire under the `.dark` class next-themes puts on <html>;
+  // the colours behind them are the --*-dark tokens (globals.css).
+  darkMode: ["variant", "&:where(.dark, .dark *)"],
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",

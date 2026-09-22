@@ -11,7 +11,7 @@ import {
   type VoiceOption,
   type VoicePref,
 } from "@/lib/useSpeech";
-import { useScrollFade } from "@/lib/useScrollFade";
+import { fadeClass, useScrollFades } from "@/lib/useScrollFade";
 import { ChevronDown, Speaker, Stamp } from "@/components/icons";
 
 const GENDER_LABELS: Record<VoiceGender, string> = {
@@ -49,7 +49,7 @@ export default function VoicePicker() {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const currentRef = useRef<HTMLButtonElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
-  const fade = useScrollFade(listRef, open);
+  const fades = useScrollFades(listRef, open);
 
   useEffect(() => {
     if (!("speechSynthesis" in window)) return;
@@ -174,7 +174,7 @@ export default function VoicePicker() {
               role="listbox"
               aria-label="Pronunciation voice"
               className={`relative max-h-[min(20rem,55vh)] overflow-y-auto overscroll-contain pb-1 ${
-                fade ? "fade-bottom" : ""
+                fadeClass(fades)
               }`}
             >
               {groups.map((group) => (

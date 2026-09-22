@@ -19,16 +19,22 @@ import { Close } from "@/components/icons";
 
 const THEMES = [
   {
-    value: "system",
-    label: "Classic",
-    hint: "Follows your device",
-    swatch: "bg-gradient-to-br from-[#efe9da] via-[#efe9da] to-[#18160f]",
+    value: "dark",
+    label: "Dark",
+    hint: "True black",
+    swatch: "bg-black",
   },
   {
-    value: "oled",
-    label: "Pure black",
-    hint: "For dark lovers",
-    swatch: "bg-black",
+    value: "light",
+    label: "Light",
+    hint: "Warm paper",
+    swatch: "bg-[#efe9da]",
+  },
+  {
+    value: "system",
+    label: "Automatic",
+    hint: "Follows your device",
+    swatch: "bg-gradient-to-br from-[#efe9da] via-[#efe9da] to-black",
   },
 ] as const;
 
@@ -103,7 +109,11 @@ export default function SettingsModal({
     }
   }
 
-  const currentTheme = !mounted ? null : theme === "oled" ? "oled" : "system";
+  const currentTheme = !mounted
+    ? null
+    : THEMES.some((t) => t.value === theme)
+      ? theme
+      : "dark";
 
   function chooseTheme(next: string) {
     const root = document.documentElement;
@@ -225,7 +235,7 @@ export default function SettingsModal({
         <h3 className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40 dark:text-ink-dark/40">
           Theme
         </h3>
-        <div className="mt-2 grid grid-cols-2 gap-2.5">
+        <div className="mt-2 grid grid-cols-3 gap-2.5">
           {THEMES.map((option) => {
             const selected = currentTheme === option.value;
             return (
@@ -234,7 +244,7 @@ export default function SettingsModal({
                 type="button"
                 onClick={() => chooseTheme(option.value)}
                 aria-pressed={selected}
-                className={`flex items-center gap-3 rounded-xl border p-3 text-left transition-colors ${
+                className={`flex flex-col items-start gap-2 rounded-xl border p-3 text-left transition-colors ${
                   selected
                     ? "border-stamp/50 bg-stamp/10 dark:border-stamp-dark/50 dark:bg-stamp-dark/10"
                     : "border-hairline hover:border-ink/25 dark:border-hairline-dark dark:hover:border-ink-dark/25"

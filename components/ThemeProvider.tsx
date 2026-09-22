@@ -4,17 +4,18 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ReactNode } from "react";
 
 /**
- * `light` / `dark` are the paper palette following the device; `oled` is the
- * true-black variant. Default is `system`, so an untouched install behaves
- * exactly as it did before a theme could be chosen at all.
+ * Two palettes: `light` (paper) and `dark` (true black). `system` follows the
+ * device. `value` maps an `oled` left in storage by an earlier version onto
+ * `dark`. An untouched install is dark.
  */
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="dark"
       enableSystem
-      themes={["light", "dark", "oled"]}
+      themes={["light", "dark"]}
+      value={{ light: "light", dark: "dark", oled: "dark" }}
     >
       {children}
     </NextThemesProvider>

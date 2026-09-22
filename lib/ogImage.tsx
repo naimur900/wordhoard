@@ -6,11 +6,13 @@ export const OG_CONTENT_TYPE = "image/png";
 export const OG_ALT =
   "Wordhoard — an illustrated vocabulary deck of 810 words across 27 sets";
 
-const PAPER = "#EFE9DA";
-const INK = "#23231F";
-const STAMP = "#8C3B2E";
-const LEDGER = "#3E5C4E";
-const HAIRLINE = "#D8CFB8";
+// The dark theme's palette (the --*-dark tokens in globals.css), to match
+// what a first visit looks like.
+const PAPER = "#000000";
+const INK = "#F0EFEB";
+const STAMP = "#FF8F76";
+const LEDGER = "#8AD4B4";
+const HAIRLINE = "#2A2A2A";
 
 /**
  * The card social platforms unfurl. Built with next/og at build time so it
@@ -65,7 +67,7 @@ export function renderOgImage() {
               display: "flex",
               marginTop: 10,
               fontSize: 40,
-              color: "rgba(35, 35, 31, 0.62)",
+              color: "rgba(240, 239, 235, 0.62)",
             }}
           >
             {words} words · {sets} illustrated sets
@@ -87,7 +89,7 @@ export function renderOgImage() {
                   display: "flex",
                   padding: "10px 26px",
                   borderRadius: 999,
-                  border: `2px solid rgba(62, 92, 78, 0.35)`,
+                  border: `2px solid rgba(138, 212, 180, 0.35)`,
                   color: LEDGER,
                   fontSize: 30,
                 }}
@@ -100,7 +102,7 @@ export function renderOgImage() {
             style={{
               display: "flex",
               fontSize: 26,
-              color: "rgba(35, 35, 31, 0.45)",
+              color: "rgba(240, 239, 235, 0.45)",
             }}
           >
             naimurrahman.dev

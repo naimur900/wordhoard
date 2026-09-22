@@ -4,7 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { searchWords } from "@/lib/vocab";
 import { useWordLink } from "@/lib/useWordLink";
-import { useScrollFade } from "@/lib/useScrollFade";
+import { fadeClass, useScrollFades } from "@/lib/useScrollFade";
 import { Search, Close } from "@/components/icons";
 
 /** `compact` is the slimmer variant that sits inside a nav row. */
@@ -18,7 +18,7 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
   const results = useMemo(() => searchWords(query, 8), [query]);
   const listRef = useRef<HTMLUListElement | null>(null);
   const showList = open && query.trim() !== "";
-  const fade = useScrollFade(listRef, showList);
+  const fades = useScrollFades(listRef, showList);
 
   function handleBlur() {
     closeTimeout.current = setTimeout(() => setOpen(false), 150);
@@ -77,7 +77,7 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
           <ul
             ref={listRef}
             className={`max-h-[min(20rem,60vh)] overflow-y-auto overscroll-contain ${
-              fade ? "fade-bottom" : ""
+              fadeClass(fades)
             }`}
           >
             {results.length === 0 ? (

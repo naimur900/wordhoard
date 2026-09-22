@@ -3,32 +3,14 @@
 @tailwind utilities;
 
 /* ---- Themes -------------------------------------------------------------
-   Every dark-side colour is a token, so a theme is just a different set of
-   values. `.dark` is the paper-at-night palette; `.oled` swaps the ground for
-   true black (no light emitted on an OLED panel) and lifts the accents enough
-   to stay legible against it. next-themes puts the class on <html>. */
+   Two palettes: the light paper one (no class) and `.dark`, true black (no
+   light emitted on an OLED panel) with the accents lifted enough to stay
+   legible against it. next-themes puts the class on <html>. */
 :root {
   color-scheme: light;
-
-  --ink-dark: 237 231 216;
-  --paper-dark: 24 22 15;
-  --card-dark: 33 30 23;
-  --stamp-dark: 217 122 99;
-  --ledger-dark: 127 174 153;
-  --caution-dark: 217 169 74;
-  --hairline-dark: 58 54 43;
-
-  --azure-dark: 147 180 230;
-  --plum-dark: 205 160 202;
-  --teal-dark: 133 199 192;
-  --honey-dark: 217 185 124;
 }
 
 .dark {
-  color-scheme: dark;
-}
-
-.oled {
   color-scheme: dark;
 
   --ink-dark: 240 239 235;
@@ -71,13 +53,8 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.dark body {
-  background-color: rgb(var(--paper-dark));
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-}
-
 /* No paper grain on OLED — the point is pixels that emit nothing at all. */
-.oled body {
+.dark body {
   background-color: rgb(var(--paper-dark));
   background-image: none;
 }
@@ -103,8 +80,7 @@ body {
   will-change: transform;
 }
 
-.dark .veil,
-.oled .veil {
+.dark .veil {
   --veil-rgb: var(--paper-dark);
 }
 
@@ -220,8 +196,7 @@ body {
   border-radius: 2px;
 }
 
-.dark :focus-visible,
-.oled :focus-visible {
+.dark :focus-visible {
   outline-color: rgb(var(--stamp-dark));
 }
 
@@ -316,18 +291,15 @@ body {
   background: transparent;
 }
 
-.dark *,
-.oled * {
+.dark * {
   scrollbar-color: rgb(var(--ink-dark) / 0.2) transparent;
 }
 
-.dark *::-webkit-scrollbar-thumb,
-.oled *::-webkit-scrollbar-thumb {
+.dark *::-webkit-scrollbar-thumb {
   background-color: rgb(var(--ink-dark) / 0.2);
 }
 
-.dark *::-webkit-scrollbar-thumb:hover,
-.oled *::-webkit-scrollbar-thumb:hover {
+.dark *::-webkit-scrollbar-thumb:hover {
   background-color: rgb(var(--ink-dark) / 0.35);
 }
 

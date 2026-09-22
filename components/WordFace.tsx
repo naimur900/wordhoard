@@ -47,7 +47,7 @@ function ChipRow({
   // What a chip you can open looks like: a halo in its own hue, lit faintly at
   // rest so touch users can see it too, and brighter under the pointer. The
   // light values are the literal ledger/stamp hex; dark reads the live token,
-  // so the OLED theme glows in its own version of the hue.
+  // so the dark theme glows in its own version of the hue.
   const glow =
     tone === "ledger"
       ? "shadow-[0_0_9px_-1px_rgba(62,92,78,0.45)] hover:bg-ledger/20 hover:shadow-[0_0_14px_0_rgba(62,92,78,0.6)] dark:shadow-[0_0_9px_-1px_rgb(var(--ledger-dark)/0.5)] dark:hover:bg-ledger-dark/20 dark:hover:shadow-[0_0_14px_0_rgb(var(--ledger-dark)/0.65)]"
