@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import type { VocabEntry } from "@/lib/types";
+import { useWordLink } from "@/lib/useWordLink";
 import type { ImageSize } from "@/lib/useImageSize";
 import WordFace from "@/components/WordFace";
 import { ChevronLeft, Close } from "@/components/icons";
@@ -30,6 +31,7 @@ export default function WordModal({
   const [closing, setClosing] = useState(false);
   const [trail, setTrail] = useState<VocabEntry[]>([entry]);
   const current = trail[trail.length - 1];
+  const home = useWordLink()(current);
 
   // Play the entrance in reverse, then let the parent unmount us.
   const requestClose = useCallback(() => {
@@ -111,14 +113,14 @@ export default function WordModal({
           />
         </div>
 
-        {/* Where the word actually lives, for anyone who wants the rest of
-            its set; `?open=` puts the page on it. */}
+        {/* Where the word lives — its set, or a category while browsing
+            those — for anyone who wants the rest of it. */}
         <Link
-          href={`/sets/${current.set}?open=${current.number}`}
+          href={home.href}
           onClick={onClose}
           className="border-t border-hairline/70 px-3.5 py-2.5 text-center font-sans text-xs font-semibold text-ink/50 transition-colors hover:bg-paper hover:text-ink sm:px-4 dark:border-hairline-dark/70 dark:text-ink-dark/50 dark:hover:bg-paper-dark dark:hover:text-ink-dark"
         >
-          Open in set {current.set}
+          Open in {home.label}
         </Link>
       </div>
     </div>,

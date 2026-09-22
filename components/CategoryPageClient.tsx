@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { getCategorySummaries } from "@/lib/categories";
 import { wordId } from "@/lib/vocab";
@@ -9,6 +9,7 @@ import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import JumpNav from "@/components/JumpNav";
+import OpenParam from "@/components/OpenParam";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft, ChevronRight } from "@/components/icons";
 
@@ -19,6 +20,22 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
   const next = category ? categories[index + 1] ?? null : null;
   const { ready, isKnown, toggle } = useKnownWords();
   const { size } = useImageSize();
+  const [open, setOpen] = useState<string | null>(null);
+  const [highlighted, setHighlighted] = useState<string | null>(null);
+
+  // A ?open=<word> link (from search or a word's modal) scrolls to that word
+  // and flags it briefly.
+  useEffect(() => {
+    const entry = category?.words.find((w) => w.word === open);
+    if (!entry) return;
+
+    setHighlighted(entry.word);
+    document
+      .getElementById(`word-${wordId(entry)}`)
+      ?.scrollIntoView({ block: "center", behavior: "smooth" });
+    const timer = setTimeout(() => setHighlighted(null), 2200);
+    return () => clearTimeout(timer);
+  }, [category, open]);
 
   if (!category) {
     return (
@@ -43,10 +60,12 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
 
   return (
     <>
+      <OpenParam onChange={setOpen} />
       <JumpNav
         backHref="/categories"
         backLabel="All categories"
         label={category.name}
+        shortLabel={category.short}
         menuLabel="Jump to a category"
         ready={ready}
         items={categories.map((c) => ({
@@ -84,6 +103,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
               entry={w}
               index={i}
               known={isKnown(wordId(w))}
+              highlighted={highlighted === w.word}
               size={size}
               onToggleKnown={() => toggle(wordId(w))}
             />

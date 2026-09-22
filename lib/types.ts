@@ -23,6 +23,7 @@ export interface SetSummary {
 
 export interface CategorySummary {
   slug: string;
+  short: string;
   name: string;
   blurb: string;
   count: number;

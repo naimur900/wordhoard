@@ -1,34 +1,15 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { getSetIds, getSetSummaries, getSetWords, wordId } from "@/lib/vocab";
 import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import JumpNav from "@/components/JumpNav";
+import OpenParam from "@/components/OpenParam";
 import WordCard from "@/components/WordCard";
 import { ChevronLeft, ChevronRight } from "@/components/icons";
-
-/**
- * Reports `?open=`. Kept in its own Suspense boundary because reading search
- * params opts whatever is above the nearest boundary out of static rendering —
- * this way only this empty component waits for the client, and the set's
- * cards still ship as prerendered HTML (which is what the offline cache holds).
- *
- * The value itself comes from `location`: on a prerendered page
- * `useSearchParams()` came back without `open`, but it still changes whenever
- * the URL does, so it serves as the signal to look again (a search result in
- * the set already open only changes `?open=`).
- */
-function OpenParam({ onChange }: { onChange: (open: string | null) => void }) {
-  const params = useSearchParams();
-  useEffect(() => {
-    onChange(new URLSearchParams(window.location.search).get("open"));
-  }, [params, onChange]);
-  return null;
-}
 
 export default function SetPageClient({ setId: setIdParam }: { setId: string }) {
   const setId = Number(setIdParam);
@@ -53,7 +34,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
 
     setHighlighted(number);
     document
-      .getElementById(`word-${number}`)
+      .getElementById(`word-${setId}-${number}`)
       ?.scrollIntoView({ block: "center", behavior: "smooth" });
     const timer = setTimeout(() => setHighlighted(null), 2200);
     return () => clearTimeout(timer);
@@ -82,9 +63,7 @@ export default function SetPageClient({ setId: setIdParam }: { setId: string }) 
 
   return (
     <>
-      <Suspense fallback={null}>
-        <OpenParam onChange={setOpen} />
-      </Suspense>
+      <OpenParam onChange={setOpen} />
       <JumpNav
         backHref="/"
         backLabel="Back to sets"

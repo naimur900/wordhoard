@@ -179,10 +179,22 @@ body {
 }
 
 /* Scrollable dropdown lists: items dissolve into the bottom edge while more
-   are waiting below (toggled off once scrolled to the end). */
+   are waiting below (toggled off once scrolled to the end), and likewise into
+   the top edge once scrolled down. One element takes one mask, hence the
+   combined `fade-y`. */
 .fade-bottom {
   mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
+}
+
+.fade-top {
+  mask-image: linear-gradient(to top, #000 calc(100% - 3rem), transparent);
+  -webkit-mask-image: linear-gradient(to top, #000 calc(100% - 3rem), transparent);
+}
+
+.fade-y {
+  mask-image: linear-gradient(to bottom, transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
 }
 
 /* Respect reduced motion preferences everywhere */

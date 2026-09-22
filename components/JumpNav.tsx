@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useHideOnScroll } from "@/lib/useHideOnScroll";
-import { useScrollFade } from "@/lib/useScrollFade";
+import { fadeClass, useScrollFades } from "@/lib/useScrollFade";
 import { SHELL_WIDTH } from "@/components/PageShell";
 import SearchBar from "@/components/SearchBar";
 import { ChevronLeft, ChevronDown, Stamp } from "@/components/icons";
@@ -27,6 +27,7 @@ export default function JumpNav({
   backHref,
   backLabel,
   label,
+  shortLabel,
   menuLabel,
   items,
   ready,
@@ -35,6 +36,8 @@ export default function JumpNav({
   backLabel: string;
   /** Text on the switcher button: where you are now. */
   label?: string;
+  /** Shown on phones in place of `label`, where the button is narrow. */
+  shortLabel?: string;
   /** Accessible name for the switcher's menu. */
   menuLabel?: string;
   items?: JumpItem[];
@@ -45,7 +48,7 @@ export default function JumpNav({
   const currentRef = useRef<HTMLAnchorElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
-  const fade = useScrollFade(listRef, open);
+  const fades = useScrollFades(listRef, open);
 
   // On phones the bar slides away on scroll-down and returns on scroll-up,
   // but never while the menu is open or search is in use.
@@ -104,7 +107,7 @@ export default function JumpNav({
       >
         {/* Phone: back icon, search filling the middle, switcher. Wider
             screens: equal side columns so the search sits truly centred. */}
-        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:grid-cols-[1fr_minmax(0,26rem)_1fr] sm:gap-4">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-1.5 sm:grid-cols-[1fr_minmax(0,26rem)_1fr] sm:gap-4">
           <Link
             href={backHref}
             aria-label={backLabel}
@@ -118,16 +121,25 @@ export default function JumpNav({
 
           {items && (
             <div className="relative justify-self-end" ref={menuRef}>
+              {/* A fixed width on phones, the same for sets and categories, so
+                  search always gets the rest of the row. */}
               <button
                 type="button"
                 onClick={() => setOpen((o) => !o)}
                 aria-expanded={open}
                 aria-haspopup="menu"
-                className="inline-flex h-[38px] max-w-[11rem] items-center gap-1.5 rounded-xl border border-hairline bg-card/80 pl-3.5 pr-2.5 font-sans text-sm font-medium text-ink/80 transition-colors hover:border-ink/25 hover:text-ink dark:border-hairline-dark dark:bg-card-dark/80 dark:text-ink-dark/80 dark:hover:border-ink-dark/25 dark:hover:text-ink-dark"
+                className="inline-flex h-[38px] w-[5.5rem] items-center justify-between gap-1 rounded-xl border border-hairline bg-card/80 pl-2.5 pr-1.5 font-sans sm:w-auto sm:max-w-[11rem] sm:justify-start sm:gap-1.5 sm:pl-3.5 sm:pr-2.5 text-sm font-medium text-ink/80 transition-colors hover:border-ink/25 hover:text-ink dark:border-hairline-dark dark:bg-card-dark/80 dark:text-ink-dark/80 dark:hover:border-ink-dark/25 dark:hover:text-ink-dark"
               >
-                <span className="truncate">{label}</span>
+                {shortLabel ? (
+                  <>
+                    <span className="truncate sm:hidden">{shortLabel}</span>
+                    <span className="hidden truncate sm:inline">{label}</span>
+                  </>
+                ) : (
+                  <span className="truncate">{label}</span>
+                )}
                 <ChevronDown
-                  className={`h-4 w-4 shrink-0 text-ink/45 transition-transform duration-200 dark:text-ink-dark/45 ${
+                  className={`h-3.5 w-3.5 shrink-0 text-ink/45 transition-transform sm:h-4 sm:w-4 duration-200 dark:text-ink-dark/45 ${
                     open ? "rotate-180" : ""
                   }`}
                 />
@@ -142,7 +154,7 @@ export default function JumpNav({
                   <ul
                     ref={listRef}
                     className={`relative max-h-[min(24rem,60vh)] overflow-y-auto overscroll-contain py-1 ${
-                      fade ? "fade-bottom" : ""
+                      fadeClass(fades)
                     }`}
                   >
                     {items.map((item) => {

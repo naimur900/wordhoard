@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { VocabEntry } from "@/lib/types";
+import { wordId } from "@/lib/vocab";
 import type { ImageSize } from "@/lib/useImageSize";
 import WordFace from "@/components/WordFace";
 import WordModal from "@/components/WordModal";
@@ -28,7 +29,7 @@ export default function WordCard({
 
   return (
     <li
-      id={`word-${entry.number}`}
+      id={`word-${wordId(entry)}`}
       // Only the first screenful staggers; past that the delay would outlast
       // the scroll it was meant to accompany.
       style={{ animationDelay: `${Math.min(index, 11) * 45}ms` }}

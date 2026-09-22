@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { searchWords } from "@/lib/vocab";
+import { useWordLink } from "@/lib/useWordLink";
 import { useScrollFade } from "@/lib/useScrollFade";
 import { Search, Close } from "@/components/icons";
 
@@ -12,6 +13,7 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
   const [open, setOpen] = useState(false);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
+  const linkFor = useWordLink();
 
   const results = useMemo(() => searchWords(query, 8), [query]);
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -27,12 +29,12 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
     setOpen(true);
   }
 
-  function goTo(setId: number, number: number) {
+  function goTo(href: string) {
     setOpen(false);
     setQuery("");
     // Drop focus so the next search reopens the list (and mobile keyboards close).
     (document.activeElement as HTMLElement | null)?.blur();
-    router.push(`/sets/${setId}?open=${number}`);
+    router.push(href);
   }
 
   return (
@@ -83,12 +85,14 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
                 No words match “{query}”.
               </li>
             ) : (
-              results.map((r) => (
+              results.map((r) => {
+                const link = linkFor(r);
+                return (
                 <li key={`${r.set}-${r.number}`}>
                   <button
                     type="button"
                     onMouseDown={(e) => e.preventDefault()}
-                    onClick={() => goTo(r.set, r.number)}
+                    onClick={() => goTo(link.href)}
                     className="flex w-full items-center gap-3 border-b border-hairline px-4 py-2.5 text-left last:border-b-0 hover:bg-paper/70 dark:border-hairline-dark dark:hover:bg-paper-dark/70"
                   >
                     <span className="min-w-0 flex-1">
@@ -99,12 +103,13 @@ export default function SearchBar({ compact = false }: { compact?: boolean }) {
                         {r.meaning}
                       </span>
                     </span>
-                    <span className="shrink-0 font-sans text-xs text-ink/35 dark:text-ink-dark/35">
-                      Set {r.set}
+                    <span className="max-w-[40%] shrink-0 truncate font-sans text-xs text-ink/35 dark:text-ink-dark/35">
+                      {link.label}
                     </span>
                   </button>
                 </li>
-              ))
+                );
+              })
             )}
           </ul>
         </div>
