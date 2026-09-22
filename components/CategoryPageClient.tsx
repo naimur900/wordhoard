@@ -6,12 +6,14 @@ import { getCategorySummaries } from "@/lib/categories";
 import { wordId } from "@/lib/vocab";
 import type { VocabEntry } from "@/lib/types";
 import { useKnownWords } from "@/lib/useKnownWords";
+import { useReview } from "@/lib/useReview";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell from "@/components/PageShell";
 import JumpNav from "@/components/JumpNav";
 import OpenParam from "@/components/OpenParam";
+import Flashcards from "@/components/Flashcards";
 import WordCard from "@/components/WordCard";
-import { ChevronLeft, ChevronRight } from "@/components/icons";
+import { Cards, ChevronLeft, ChevronRight } from "@/components/icons";
 
 export default function CategoryPageClient({ slug }: { slug: string }) {
   const categories = useMemo(() => getCategorySummaries(), []);
@@ -19,6 +21,8 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
   const category = index === -1 ? null : categories[index];
   const next = category ? categories[index + 1] ?? null : null;
   const { ready, isKnown, toggle } = useKnownWords();
+  const review = useReview();
+  const [cardsOpen, setCardsOpen] = useState(false);
   const { size } = useImageSize();
   const [open, setOpen] = useState<string | null>(null);
   const [highlighted, setHighlighted] = useState<string | null>(null);
@@ -57,6 +61,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
   const knownIn = (list: VocabEntry[]) => list.filter((w) => isKnown(wordId(w))).length;
   const known = knownIn(words);
   const progress = ready ? known / words.length : 0;
+  const due = review.ready ? review.dueCount(words.map(wordId)) : 0;
 
   return (
     <>
@@ -79,15 +84,32 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
 
       <PageShell padTop={false}>
         <div className="-mt-2 rounded-2xl border border-hairline bg-card/70 p-4 sm:p-5 dark:border-hairline-dark dark:bg-card-dark/70">
-          <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl dark:text-ink-dark">
-            {category.name}
-          </h1>
-          <p className="mt-1 font-sans text-sm text-ink/60 dark:text-ink-dark/60">
-            {category.blurb}
-          </p>
-          <p className="mt-1 font-sans text-sm text-ink/50 dark:text-ink-dark/50">
-            {ready ? `${known} of ${words.length} known` : " "}
-          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
+              <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl dark:text-ink-dark">
+                {category.name}
+              </h1>
+              <p className="mt-1 font-sans text-sm text-ink/60 dark:text-ink-dark/60">
+                {category.blurb}
+              </p>
+              <p className="mt-1 font-sans text-sm text-ink/50 dark:text-ink-dark/50">
+                {ready ? `${known} of ${words.length} known` : " "}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCardsOpen(true)}
+              className="flex shrink-0 items-center gap-2 self-start rounded-xl border border-hairline bg-card px-3 py-2 font-sans text-sm font-semibold text-ink/80 transition-colors hover:border-ink/25 hover:text-ink dark:border-hairline-dark dark:bg-card-dark dark:text-ink-dark/80 dark:hover:border-ink-dark/25 dark:hover:text-ink-dark"
+            >
+              <Cards className="h-4 w-4 text-stamp dark:text-stamp-dark" />
+              Flashcards
+              {due > 0 && (
+                <span className="rounded-full bg-stamp/10 px-1.5 py-0.5 text-[11px] tabular-nums text-stamp dark:bg-stamp-dark/10 dark:text-stamp-dark">
+                  {due} due
+                </span>
+              )}
+            </button>
+          </div>
           <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-hairline dark:bg-hairline-dark">
             <div
               className="h-full rounded-full bg-ledger transition-[width] duration-500 dark:bg-ledger-dark"
@@ -109,6 +131,18 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
             />
           ))}
         </ul>
+
+        {cardsOpen && (
+          <Flashcards
+            title={category.name}
+            words={words}
+            isKnown={isKnown}
+            onLearned={(id) => {
+              if (!isKnown(id)) toggle(id);
+            }}
+            onClose={() => setCardsOpen(false)}
+          />
+        )}
 
         {next ? (
           <Link

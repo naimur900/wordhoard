@@ -34,6 +34,9 @@ export default function WordImage({
         <img
           src={src}
           alt=""
+          // A native image drag would swallow the pointer stream a swipe
+          // (flashcards) depends on.
+          draggable={false}
           className="absolute inset-0 h-full w-full object-cover"
           onError={() => setErrored(true)}
           loading="lazy"

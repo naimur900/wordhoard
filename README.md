@@ -43,8 +43,12 @@ project: push it to a Git repo and import it at vercel.com/new, or run
 - `lib/vocab.ts` — helpers for reading/searching/grouping the word data.
 - `lib/useKnownWords.ts` — tracks which words you have marked "known" in
   `localStorage`, on the device only (nothing is sent anywhere).
-- `components/StudyOverlay.tsx` — the full-screen flip-card study mode,
-  with swipe, tap-to-flip, and left/right arrow key support.
+- `components/Flashcards.tsx` — the full-screen flip-card mode opened from
+  a set, with swipe, tap-to-flip, keyboard control, and Again/Hard/Good
+  ratings.
+- `lib/useReview.ts` — the review schedule those ratings write: one box and
+  due date per word in `localStorage`, widening gaps of 1, 3, 7, 21 and 45
+  days. A word that reaches the last box is marked known.
 - `app/page.tsx` — the home screen: search plus the list of 27 sets.
 - `app/sets/[setId]/page.tsx` — a single set's word list, and the entry
   point into study mode (jumps to your first not-yet-known word).

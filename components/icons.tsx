@@ -136,3 +136,23 @@ export function Tag(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** A small stack of cards, for flashcard mode. */
+export function Cards(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="3" y="7" width="13" height="14" rx="2.2" stroke="currentColor" />
+      <path d="M7.5 4.5h10A2.5 2.5 0 0 1 20 7v10" stroke="currentColor" />
+    </svg>
+  );
+}
+
+/** Crossing arrows, for shuffling a deck. */
+export function Shuffle(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M3 6h3.6l8.8 12H21M3 18h3.6l3-4.1M14.2 8.1 15.4 6H21" stroke="currentColor" />
+      <path d="m18.4 3.3 2.7 2.7-2.7 2.7M18.4 15.3l2.7 2.7-2.7 2.7" stroke="currentColor" />
+    </svg>
+  );
+}
