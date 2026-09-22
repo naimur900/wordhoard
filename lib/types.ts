@@ -10,10 +10,21 @@ export interface VocabEntry {
   commonly_confused_with: string[] | null;
   synonyms: string[];
   antonyms: string[];
+  /** Category slugs (see lib/categories.ts), the main one first. */
+  categories: string[];
 }
 
 export interface SetSummary {
   id: number;
+  count: number;
+  words: VocabEntry[];
+  sample: string[];
+}
+
+export interface CategorySummary {
+  slug: string;
+  name: string;
+  blurb: string;
   count: number;
   words: VocabEntry[];
   sample: string[];

@@ -3,14 +3,15 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ALL_WORDS, getSetSummaries } from "@/lib/vocab";
+import { CATEGORIES } from "@/lib/categories";
 import { useKnownWords } from "@/lib/useKnownWords";
 import { useImageSize } from "@/lib/useImageSize";
 import PageShell, { SHELL_WIDTH } from "@/components/PageShell";
 import SearchDock from "@/components/SearchDock";
-import SetRow from "@/components/SetRow";
+import GroupRow from "@/components/GroupRow";
 import SettingsModal from "@/components/SettingsModal";
 import SiteFooter from "@/components/SiteFooter";
-import { Gear, Quiz } from "@/components/icons";
+import { ChevronRight, Gear, Quiz, Tag } from "@/components/icons";
 
 export default function HomePage() {
   const sets = useMemo(() => getSetSummaries(), []);
@@ -72,6 +73,21 @@ export default function HomePage() {
             {ready ? `${knownTotal} of ${total} words known` : "\u00A0"}
           </p>
         </div>
+
+        <Link
+          href="/categories"
+          // Mirrors the search bar below it: same padding, type size and icon.
+          className="group mt-4 flex items-center gap-3 rounded-xl border border-hairline bg-card px-3.5 py-3 transition-colors hover:border-ink/25 dark:border-hairline-dark dark:bg-card-dark dark:hover:border-ink-dark/25"
+        >
+          <Tag className="h-4 w-4 shrink-0 text-stamp dark:text-stamp-dark" />
+          <span className="min-w-0 flex-1 truncate font-sans text-base text-ink dark:text-ink-dark">
+            Browse by category
+          </span>
+          <span className="shrink-0 font-sans text-xs tabular-nums text-ink/45 dark:text-ink-dark/45">
+            {CATEGORIES.length} topics
+          </span>
+          <ChevronRight className="h-4 w-4 shrink-0 text-ink/25 transition-transform group-hover:translate-x-0.5 dark:text-ink-dark/25" />
+        </Link>
       </div>
 
       <SearchDock />
@@ -82,9 +98,13 @@ export default function HomePage() {
         </h2>
         <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {sets.map((set, i) => (
-            <SetRow
+            <GroupRow
               key={set.id}
-              set={set}
+              href={`/sets/${set.id}`}
+              badge={String(set.id).padStart(2, "0")}
+              title={`Set ${set.id}`}
+              sample={set.sample}
+              count={set.count}
               index={i}
               known={countForSet(set.id)}
               ready={ready}

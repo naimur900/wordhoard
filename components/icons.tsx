@@ -123,3 +123,16 @@ export function Speaker(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** A price tag, for browsing words by category. */
+export function Tag(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path
+        d="M3.5 12.1V4.9a1.4 1.4 0 0 1 1.4-1.4h7.2a1.4 1.4 0 0 1 1 .4l7.7 7.7a1.4 1.4 0 0 1 0 2l-7.2 7.2a1.4 1.4 0 0 1-2 0l-7.7-7.7a1.4 1.4 0 0 1-.4-1Z"
+        stroke="currentColor"
+      />
+      <circle cx="8.2" cy="8.2" r="1.4" stroke="currentColor" />
+    </svg>
+  );
+}

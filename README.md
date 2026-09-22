@@ -48,6 +48,10 @@ project: push it to a Git repo and import it at vercel.com/new, or run
 - `app/page.tsx` — the home screen: search plus the list of 27 sets.
 - `app/sets/[setId]/page.tsx` — a single set's word list, and the entry
   point into study mode (jumps to your first not-yet-known word).
+- `lib/categories.ts` — the 22 categories. Each entry in `data/vocab.json`
+  lists its category slugs in `categories`, main one first.
+- `app/categories/page.tsx` and `app/categories/[slug]/page.tsx` — the
+  category list, and one category's words.
 
 ## Notes
 

@@ -1,24 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import type { SetSummary } from "@/lib/types";
 import { ChevronRight } from "@/components/icons";
 
-export default function SetRow({
-  set,
+/** One row in a list of word groups: a set on the home page, or a category. */
+export default function GroupRow({
+  href,
+  badge,
+  title,
+  sample,
+  count,
   known,
   ready,
   index = 0,
 }: {
-  set: SetSummary;
+  href: string;
+  /** The short label in the tile on the left, such as "01". Optional. */
+  badge?: string;
+  title: string;
+  sample: string[];
+  count: number;
   known: number;
   ready: boolean;
   /** Position in the list, used to stagger the entrance animation. */
   index?: number;
 }) {
-  const pad = String(set.id).padStart(2, "0");
-  const complete = ready && known === set.count;
-  const progress = ready ? known / set.count : 0;
+  const complete = ready && known === count;
+  const progress = ready ? known / count : 0;
 
   return (
     <li
@@ -27,34 +35,37 @@ export default function SetRow({
       style={{ animationDelay: `${Math.min(index, 11) * 45}ms` }}
     >
       <Link
-        href={`/sets/${set.id}`}
+        href={href}
         className={`flex h-full items-center gap-3.5 rounded-2xl border bg-card/80 p-3.5 transition-colors sm:gap-4 sm:p-4 dark:bg-card-dark/80 ${
           complete
             ? "border-ledger/35 dark:border-ledger-dark/30"
             : "border-hairline hover:border-ink/25 dark:border-hairline-dark dark:hover:border-ink-dark/25"
         }`}
       >
-        <span
-          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border font-serif text-base ${
-            complete
-              ? "border-ledger/40 bg-ledger/10 text-ledger dark:border-ledger-dark/40 dark:bg-ledger-dark/10 dark:text-ledger-dark"
-              : "border-stamp/30 bg-stamp/5 text-stamp dark:border-stamp-dark/40 dark:bg-stamp-dark/10 dark:text-stamp-dark"
-          }`}
-        >
-          {pad}
-        </span>
+        {badge && (
+          <span
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border font-serif text-base ${
+              complete
+                ? "border-ledger/40 bg-ledger/10 text-ledger dark:border-ledger-dark/40 dark:bg-ledger-dark/10 dark:text-ledger-dark"
+                : "border-stamp/30 bg-stamp/5 text-stamp dark:border-stamp-dark/40 dark:bg-stamp-dark/10 dark:text-stamp-dark"
+            }`}
+          >
+            {badge}
+          </span>
+        )}
 
         <span className="min-w-0 flex-1">
           <span className="flex items-baseline justify-between gap-2">
-            <span className="font-serif text-lg font-semibold text-ink dark:text-ink-dark">
-              Set {set.id}
+            {/* Wraps rather than truncates, so long category names stay whole. */}
+            <span className="font-serif text-lg font-semibold leading-snug text-ink dark:text-ink-dark">
+              {title}
             </span>
             <span className="shrink-0 font-sans text-xs tabular-nums text-ink/50 dark:text-ink-dark/50">
-              {ready ? `${known}/${set.count}` : "\u00A0"}
+              {ready ? `${known}/${count}` : "\u00A0"}
             </span>
           </span>
           <span className="mt-0.5 block truncate font-sans text-sm text-ink/55 dark:text-ink-dark/55">
-            {set.sample.join(", ")}…
+            {sample.join(", ")}…
           </span>
           <span className="mt-2 block h-1 w-full overflow-hidden rounded-full bg-hairline dark:bg-hairline-dark">
             <span

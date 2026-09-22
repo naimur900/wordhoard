@@ -71,24 +71,34 @@ async function precache() {
   const homeHtml = await home.clone().text();
   await pages.put("/", home);
 
-  // The home page links every set, so the list never needs maintaining here.
-  const paths = new Set(["/test"]);
-  for (const [, path] of homeHtml.matchAll(/href="(\/sets\/\d+)"/g)) paths.add(path);
-
   const htmls = [homeHtml];
   let complete = true;
-  await Promise.all(
-    [...paths].map(async (path) => {
-      try {
-        const res = await fetch(path, { cache: "reload" });
-        if (!res.ok) throw new Error(path);
-        htmls.push(await res.clone().text());
-        await pages.put(path, res);
-      } catch {
-        complete = false;
-      }
-    })
-  );
+  async function savePages(paths) {
+    await Promise.all(
+      [...paths].map(async (path) => {
+        try {
+          const res = await fetch(path, { cache: "reload" });
+          if (!res.ok) throw new Error(path);
+          htmls.push(await res.clone().text());
+          await pages.put(path, res);
+        } catch {
+          complete = false;
+        }
+      })
+    );
+  }
+
+  // The home page links every set and the category index, which in turn
+  // links every category, so neither list needs maintaining here.
+  const paths = new Set(["/test", "/categories"]);
+  for (const [, path] of homeHtml.matchAll(/href="(\/sets\/\d+)"/g)) paths.add(path);
+  await savePages(paths);
+
+  const categories = new Set();
+  for (const html of htmls) {
+    for (const [, path] of html.matchAll(/href="(\/categories\/[a-z-]+)"/g)) categories.add(path);
+  }
+  await savePages(categories);
 
   // Next's scripts and styles, as referenced by the pages — both the tags and
   // the chunk lists in the inline RSC payload, whose escaped quotes the
