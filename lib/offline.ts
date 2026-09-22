@@ -27,6 +27,14 @@ export async function countSavedImages(urls: string[]): Promise<number> {
 }
 
 /**
+ * Forgets every saved picture, freeing the space back up. Pictures are saved
+ * again as they are viewed, or all at once from Settings.
+ */
+export async function clearImages(): Promise<void> {
+  await caches.delete(IMAGES_CACHE);
+}
+
+/**
  * Saves every picture not already saved, a few at a time. Resolves with how
  * many failed, so the caller can offer a retry for those.
  */

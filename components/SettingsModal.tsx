@@ -9,6 +9,7 @@ import {
   type ImageSize,
 } from "@/lib/useImageSize";
 import {
+  clearImages,
   countSavedImages,
   downloadImages,
   imageUrls,
@@ -47,6 +48,48 @@ const DOWNLOAD_LABELS = {
   failed: "Retry",
 } as const;
 
+/**
+ * A clear button that asks first. Both labels share one grid cell, so the
+ * button keeps the width of the longer one and the text beside it never
+ * reflows; the labels cross-fade instead of snapping. The border stays put
+ * too — only its colour changes — so arming it shifts nothing.
+ */
+function ClearButton({
+  armed,
+  onClick,
+}: {
+  armed: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={armed ? "Tap again to confirm clearing" : "Clear"}
+      className={`grid shrink-0 rounded-full border px-3.5 py-1.5 text-center font-sans text-xs font-semibold transition-colors ${
+        armed
+          ? "border-stamp bg-stamp text-paper dark:border-stamp-dark dark:bg-stamp-dark dark:text-paper-dark"
+          : "border-hairline text-ink/70 hover:border-stamp/40 hover:text-stamp dark:border-hairline-dark dark:text-ink-dark/70 dark:hover:border-stamp-dark/40 dark:hover:text-stamp-dark"
+      }`}
+    >
+      {[
+        { label: "Clear", shown: !armed },
+        { label: "Confirm?", shown: armed },
+      ].map(({ label, shown }) => (
+        <span
+          key={label}
+          aria-hidden={!shown}
+          className={`col-start-1 row-start-1 transition-opacity duration-200 ${
+            shown ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {label}
+        </span>
+      ))}
+    </button>
+  );
+}
+
 /** Preview block, scaled the way the real thumbnail is. */
 const PREVIEW: Record<ImageSize, string> = {
   s: "h-5 w-5",
@@ -70,7 +113,7 @@ export default function SettingsModal({
   const review = useReview();
   // Clearing asks first, in the button itself rather than a second dialog
   // stacked on this one; the question withdraws if it goes unanswered.
-  const [confirmClear, setConfirmClear] = useState(false);
+  const [confirm, setConfirm] = useState<"images" | "review" | null>(null);
   const [mounted, setMounted] = useState(false);
   const [closing, setClosing] = useState(false);
 
@@ -138,10 +181,10 @@ export default function SettingsModal({
   }
 
   useEffect(() => {
-    if (!confirmClear) return;
-    const timer = window.setTimeout(() => setConfirmClear(false), 4000);
+    if (!confirm) return;
+    const timer = window.setTimeout(() => setConfirm(null), 4000);
     return () => window.clearTimeout(timer);
-  }, [confirmClear]);
+  }, [confirm]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -314,7 +357,17 @@ export default function SettingsModal({
                           : "Words work offline already; this adds every picture."}
                     </p>
                   </div>
-                  {offline.saved < offline.total && (
+                  {offline.saved === offline.total ? (
+                    <ClearButton
+                      armed={confirm === "images"}
+                      onClick={async () => {
+                        if (confirm !== "images") return setConfirm("images");
+                        await clearImages();
+                        setOffline((o) => o && { ...o, saved: 0, status: "idle" });
+                        setConfirm(null);
+                      }}
+                    />
+                  ) : (
                     <button
                       type="button"
                       onClick={saveForOffline}
@@ -369,21 +422,14 @@ export default function SettingsModal({
                     marked known stay marked.
                   </p>
                 </div>
-                <button
-                  type="button"
+                <ClearButton
+                  armed={confirm === "review"}
                   onClick={() => {
-                    if (!confirmClear) return setConfirmClear(true);
+                    if (confirm !== "review") return setConfirm("review");
                     review.reset();
-                    setConfirmClear(false);
+                    setConfirm(null);
                   }}
-                  className={`shrink-0 rounded-full px-3.5 py-1.5 font-sans text-xs font-semibold transition-colors ${
-                    confirmClear
-                      ? "bg-stamp text-paper dark:bg-stamp-dark dark:text-paper-dark"
-                      : "border border-hairline text-ink/70 hover:border-stamp/40 hover:text-stamp dark:border-hairline-dark dark:text-ink-dark/70 dark:hover:border-stamp-dark/40 dark:hover:text-stamp-dark"
-                  }`}
-                >
-                  {confirmClear ? "Tap to confirm" : "Clear"}
-                </button>
+                />
               </div>
             </>
           )}
