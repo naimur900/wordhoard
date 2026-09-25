@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "word list",
     "English vocabulary",
   ],
-  authors: [{ name: "Naimur", url: "https://naimurrahman.dev/" }],
+  authors: [{ name: "Naimur", url: "https://www.naimurrahman.info.bd/" }],
   creator: "Naimur",
   publisher: "Naimur",
   manifest: "/manifest.webmanifest",

@@ -105,7 +105,7 @@ export function renderOgImage() {
               color: "rgba(240, 239, 235, 0.45)",
             }}
           >
-            naimurrahman.dev
+            naimurrahman.info.bd
           </div>
         </div>
       </div>

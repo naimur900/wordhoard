@@ -4,7 +4,7 @@ export default function SiteFooter() {
       <p className="font-sans text-xs text-ink/45 dark:text-ink-dark/45">
         Developed by{" "}
         <a
-          href="https://naimurrahman.dev/"
+          href="https://www.naimurrahman.info.bd/"
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium text-ink/70 underline decoration-ink/20 underline-offset-2 transition-colors hover:text-stamp hover:decoration-stamp/40 dark:text-ink-dark/70 dark:decoration-ink-dark/20 dark:hover:text-stamp-dark dark:hover:decoration-stamp-dark/40"
